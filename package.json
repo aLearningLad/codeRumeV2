@@ -16,9 +16,10 @@
     "@liveblocks/yjs": "^2.10.2",
     "codemirror": "^6.0.1",
     "next": "15.0.2",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0-rc2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "socket.io": "^4.8.1",
     "y-codemirror.next": "^0.3.5",
     "yjs": "^13.6.20"
   },
