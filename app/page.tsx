@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 // import Link from "next/link";
 // import {
@@ -73,10 +73,18 @@
 //   );
 // }
 
+import { useClerk } from "@clerk/nextjs";
+
 export default function Home() {
+  const handleSignOut = async () => {
+    try {
+    } catch (error) {}
+  };
+
   return (
-    <main className="min-h-screen w-full bg-slate-900 text-white flex justify-center items-center">
+    <main className="min-h-screen w-full flex-col bg-slate-900 text-white flex justify-center items-center">
       Welcome!
+      <button>Sign Out</button>
     </main>
   );
 }

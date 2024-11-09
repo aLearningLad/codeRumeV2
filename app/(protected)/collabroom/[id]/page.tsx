@@ -56,27 +56,8 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
   return (
     <Room>
-      <div className=" w-full min-h-screen flex flex-col bg-slate-900 justify-center">
-        <div className=" w-full h-full flex flex-col items-center lg:w-6/12 ">
-          {messages.map((msg, index) => (
-            <div
-              className=" text-white border-4 border-red-500 h-40"
-              key={index}
-            >
-              <strong>{msg.username}</strong>: {msg.message}
-            </div>
-          ))}
-        </div>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
-          className=" h-20"
-        />
-        <button className=" bg-red-600 text-black h-12" onClick={sendMessage}>
-          Send
-        </button>
+      <div className=" w-full min-h-screen flex flex-col bg-slate-900 ">
+        <header></header>
       </div>
     </Room>
   );
