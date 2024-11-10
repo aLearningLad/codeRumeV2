@@ -74,17 +74,58 @@
 // }
 
 import { useClerk } from "@clerk/nextjs";
+import { useState } from "react";
 
 export default function Home() {
-  const handleSignOut = async () => {
+  const [emailBody, setEmailBody] = useState<string>(
+    "Hi there! If you recieve this, it means your email sender service is working!"
+  );
+  const [subjectLine, setSubjectLine] = useState<string>(
+    "This is just a test subject line"
+  );
+  const [sessionHost, setSessionHost] = useState<string>(
+    "Thato, also known as HIM!"
+  );
+  const [potentialCollaborators, setPotentialCollaborators] = useState<
+    string[]
+  >(["mocmanca@gmail.com", "leapingbulls@gmail.com"]);
+
+  const { signOut } = useClerk();
+
+  // send invite to codeRume session
+  const handleSend = async () => {
     try {
-    } catch (error) {}
+      const response = await fetch("/api/invite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailBody,
+          subjectLine,
+          sessionHost,
+          potentialCollaborators,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Email to workers sent successfully", data);
+      } else {
+        console.error("Failed to send invites: ", data.message);
+        alert("Error sending email to admin");
+      }
+    } catch (error) {
+      console.log("Error while sending email: ", error);
+    }
   };
 
   return (
     <main className="min-h-screen w-full flex-col bg-slate-900 text-white flex justify-center items-center">
       Welcome!
-      <button>Sign Out</button>
+      <button onClick={() => signOut({ redirectUrl: "/" })}>Sign Out</button>
+      <button onClick={handleSend}>Send Invite</button>
     </main>
   );
 }

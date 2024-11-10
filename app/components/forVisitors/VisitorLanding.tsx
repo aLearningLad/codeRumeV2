@@ -15,7 +15,7 @@ const VisitorLanding = () => {
       strategy,
       redirectUrl: "https://cuddly-parakeet-97.accounts.dev/sign-in",
       //   https://cuddly-parakeet-97.accounts.dev/sign-in
-      redirectUrlComplete: "/",
+      redirectUrlComplete: "/profile",
     });
   };
 
