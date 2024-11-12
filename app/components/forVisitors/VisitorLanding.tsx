@@ -10,6 +10,9 @@ const VisitorLanding = () => {
 
   if (!signIn) return null;
 
+  // this is for new users
+
+  // this is for users with an exisitng account
   const signInWith = (strategy: OAuthStrategy) => {
     return signIn.authenticateWithRedirect({
       strategy,
