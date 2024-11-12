@@ -54,6 +54,12 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
     setInput("");
   };
 
+  // save a collaborator to DB
+  const saveCollaborator = async () => {};
+
+  // invite collaborators to a session
+  const handleInvite = async () => {};
+
   return (
     <Room>
       <div className=" w-full min-h-screen flex flex-col bg-slate-900 ">

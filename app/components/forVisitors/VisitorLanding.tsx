@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { OAuthStrategy } from "@clerk/types";
-import { useSignIn } from "@clerk/nextjs";
+import { SignUp, useSignIn, useSignUp } from "@clerk/nextjs";
 import { useState } from "react";
 import { isNewOptions } from "@/lib/enums";
 
@@ -10,10 +10,18 @@ const VisitorLanding = () => {
   const [isNew, setIsNew] = useState<string>(isNewOptions.N);
 
   const { signIn } = useSignIn();
+  const { signUp } = useSignUp();
 
   if (!signIn) return null;
 
   // this is for new users
+  const signUpWith = (strategy: OAuthStrategy) => {
+    return signUp?.authenticateWithRedirect({
+      strategy,
+      redirectUrl: "https://cuddly-parakeet-97.accounts.dev/sign-up",
+      redirectUrlComplete: "/profile",
+    });
+  };
 
   // this is for users with an exisitng account
   const signInWith = (strategy: OAuthStrategy) => {
@@ -48,6 +56,12 @@ const VisitorLanding = () => {
         (isNew === isNewOptions.Y && (
           <div className=" w-full h-full flex flex-col items-center justify-center gap-5">
             Let's get you signed up!
+            <button
+              onClick={() => signUpWith("oauth_google")}
+              className=" h-16 w-3/12 bg-slate-950 text-white flex justify-center items-center text-center"
+            >
+              Yup, sign me up!
+            </button>
             <button
               onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
                 setIsNew(isNewOptions.N)
