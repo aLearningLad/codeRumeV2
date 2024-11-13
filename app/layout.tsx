@@ -42,10 +42,11 @@ export default function RootLayout({
           <SignedOut>
             <VisitorLanding />
           </SignedOut>
-
-          <SignedIn>
-            <Providers>{children}</Providers>
-          </SignedIn>
+          <ClerkProvider dynamic>
+            <SignedIn>
+              <Providers>{children}</Providers>
+            </SignedIn>
+          </ClerkProvider>
         </body>
       </html>
     </ClerkProvider>

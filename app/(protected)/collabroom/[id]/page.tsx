@@ -4,6 +4,8 @@ import { Editor } from "@/app/components/forEditor/Editor";
 import { Room } from "@/app/components/forCollabRoom/Room";
 import Pusher from "pusher-js";
 import { useEffect, useState } from "react";
+import { useAuth, useUser } from "@clerk/nextjs";
+import { fetchUserId } from "@/utils/fetchUserId";
 
 interface chatProps {
   params: {
@@ -18,10 +20,25 @@ interface Message {
 }
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
+  const userId = useAuth().userId;
   const { roomId, username } = params;
 
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
+  const [newCollaboratorEmail, setNewCollaboratorEmail] = useState<string>("");
+  const [hostEmail, setHostEmail] = useState<string>("");
+
+  // get user email from useAuth
+  const userEmailData = useUser().user?.emailAddresses[0].emailAddress;
+  useEffect(() => {
+    setHostEmail(userEmailData!);
+  }, []);
+
+  // get userId from db, using email. So dep. arr is user email
+  useEffect(() => {
+    fetchUserId(hostEmail);
+    console.log(hostEmail);
+  }, [hostEmail]);
 
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY!, {
