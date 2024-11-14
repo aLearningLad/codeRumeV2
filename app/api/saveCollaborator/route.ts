@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import sql from "@/lib/db";
 
 export async function POST(request: NextRequest) {
-  const { userId, email } = await request.json();
+  const { unique_id, userId, email } = await request.json();
 
   if (!userId || !email) {
     console.log("Some collaborator data is missing");
@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
 
   try {
     await sql(
-      `INSERT INTO all_collaborators (friend_id, email) VALUES ($1, $2)`,
-      [userId, email]
+      `INSERT INTO all_collaborators (unique_id, friend_id, email) VALUES ($1, $2, $3)`,
+      [unique_id, userId, email]
     );
 
     return NextResponse.json({

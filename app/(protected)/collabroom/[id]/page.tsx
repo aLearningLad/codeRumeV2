@@ -6,6 +6,7 @@ import Pusher from "pusher-js";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { fetchUserId } from "@/utils/fetchUserId";
+import { nanoid } from "nanoid";
 
 interface chatProps {
   params: {
@@ -31,7 +32,8 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const [hostEmail, setHostEmail] = useState<string>(userEmail!);
   const [friend_id, set_friend_id] = useState<string>("");
   const [email, set_email] = useState<string>(""); // this is for the collaborator being invited
-  const [unique_id, set_unique_id] = useState<string>("");
+  const [unique_id, set_unique_id] = useState<string | null>();
+  const [clickCount, setClickCount] = useState<boolean>(false);
 
   // get userId from db, using email. So dep. arr is user email ====> why did I do this, when this id is the userId from clerk?? Aaargh!
   // useEffect(() => {
@@ -69,8 +71,16 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
     setInput("");
   };
 
+  // refresh the unique_id value everytime the page loads, and everytime saveCollaborator() is called
+  useEffect(() => {
+    const uniqueValue = nanoid();
+    set_unique_id(uniqueValue);
+  }, [clickCount]);
+
   // save a collaborator to DB
   const saveCollaborator = async () => {
+    setClickCount((prev) => !prev);
+
     try {
       const collabSaveResults = await fetch("/api/saveCollaborator", {
         method: "POST",
@@ -78,6 +88,7 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          unique_id,
           userId,
           email,
         }),

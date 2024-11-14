@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       });
     }
 
-    console.log("Email to employees sent successfully");
+    console.log("Email to collaborators sent successfully");
     return NextResponse.json(
       {
         message: "Email sent successfully!",
