@@ -12,7 +12,7 @@ const ProfilePage = async () => {
     user?.id,
   ]);
 
-  console.log("This is the db data: ", result);
+  //   console.log("This is the db data: ", result);
 
   if (result.length < 1) {
     return (

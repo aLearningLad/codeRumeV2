@@ -73,8 +73,8 @@
 //   );
 // }
 
-import { useClerk } from "@clerk/nextjs";
-import { useState } from "react";
+import { useClerk, useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [emailBody, setEmailBody] = useState<string>(
