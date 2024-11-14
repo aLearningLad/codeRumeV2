@@ -21,6 +21,7 @@ interface Message {
 }
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
+  const user = useUser().user;
   const userId = useAuth().userId;
   console.log("This is the userId from clerk: ", userId);
   const userEmail = useUser().user?.emailAddresses[0].emailAddress;
@@ -34,6 +35,19 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const [email, set_email] = useState<string>(""); // this is for the collaborator being invited
   const [unique_id, set_unique_id] = useState<string | null>();
   const [clickCount, setClickCount] = useState<boolean>(false);
+
+  // states for invite
+  const [emailText, setEmailText] = useState<string | null>(null);
+  const [subjectLine, setSubjectLine] = useState<string>("");
+  const [sessionHost, setSessionHost] = useState(user?.username);
+  const [potentialCollaborators, setPotentialCollaborators] = useState<
+    string[]
+  >([]);
+  const [startsAt, setStartsAt] = useState<string | null>(null);
+  const [primaryLang, setPrimaryLang] = useState<string | null>(null);
+  const [framework, setFramework] = useState<string | null>(null);
+  const [sessionLength, setSessionLength] = useState<string | null>(null);
+  const [expMemberCount, setExpMemberCount] = useState<number>(0);
 
   // get userId from db, using email. So dep. arr is user email ====> why did I do this, when this id is the userId from clerk?? Aaargh!
   // useEffect(() => {
@@ -99,7 +113,27 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   };
 
   // invite collaborators to a session
-  const handleInvite = async () => {};
+  const handleInvite = async () => {
+    try {
+      await fetch("/api/invite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailText,
+          subjectLine,
+          sessionHost,
+          potentialCollaborators,
+          startsAt,
+          primaryLang,
+          framework,
+          sessionLength,
+          expMemberCount,
+        }),
+      });
+    } catch (error) {}
+  };
 
   return (
     <Room>

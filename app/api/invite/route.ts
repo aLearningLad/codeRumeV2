@@ -2,11 +2,20 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
-  const { emailBody, subjectLine, sessionHost, potentialCollaborators } =
-    await req.json();
+  const {
+    emailText,
+    subjectLine,
+    sessionHost,
+    potentialCollaborators,
+    startsAt,
+    primaryLang,
+    framework,
+    sessionLength,
+    expMemberCount,
+  } = await req.json();
 
   // handle error if any data is missing
-  if (!emailBody || !subjectLine || !sessionHost || !potentialCollaborators) {
+  if (!emailText || !subjectLine || !sessionHost || !potentialCollaborators) {
     return NextResponse.json(
       {
         message: "Some details from the client are missing",
@@ -31,7 +40,7 @@ export async function POST(req: Request) {
         from: process.env.EMAIL,
         to: eachPotentialCollaborator,
         subject: subjectLine,
-        text: `This electronic mail is from ${sessionHost}: ${emailBody} `,
+        text: `This electronic mail is from ${sessionHost}: ${emailText} `,
       });
     }
 
