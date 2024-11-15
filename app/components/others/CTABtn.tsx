@@ -12,16 +12,9 @@ import {
 
 const CTABtn = () => {
   return (
-    // <div>
-    //   <button className="rounded-lg lg:rounded-xl w-fit h-fit py-3 px-5 bg-black text-white">
-    //     Get Started
-    //   </button>
-    // </div>
     <Dialog>
       <DialogTrigger className="rounded-lg lg:rounded-xl w-fit h-fit py-3 px-5 bg-black text-white">
-        {/* <button className="rounded-lg lg:rounded-xl w-fit h-fit py-3 px-5 bg-black text-white"> */}
         Get Started
-        {/* </button> */}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
