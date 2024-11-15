@@ -10,7 +10,10 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import VisitorLanding from "./components/forVisitors/VisitorLanding";
+import { Inter, Baskervville } from "next/font/google";
+import Navbar from "./components/forVisitorLayout/Navbar";
 
+const baskerville = Baskervville({ weight: "400", subsets: ["latin"] });
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,7 +28,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "codeRume V2",
   description:
-    "Code. Collaborate. Share | codeRume is the lightweight, easy-to-use code collaboration platform where rookies and savants gel, built incredible projects, and learn from one another",
+    "Code. Collaborate. Share | codeRume is the lightweight, easy-to-use code collaboration platform where rookies and savants gel, build incredible projects, and learn from one another",
 };
 
 export default function RootLayout({
@@ -36,11 +39,18 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={baskerville.className}>
+          <link
+            rel="icon"
+            sizes="<generated>"
+            type="image<generated>"
+            href="/assets/crlogo.png"
+          />
           <SignedOut>
-            <VisitorLanding />
+            <main className=" min-h-screen max-h-fit w-full bg-white flex flex-col justify-center ">
+              <Navbar />
+              <VisitorLanding />
+            </main>
           </SignedOut>
           <ClerkProvider dynamic>
             <SignedIn>

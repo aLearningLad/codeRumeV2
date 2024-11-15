@@ -5,6 +5,7 @@ import { OAuthStrategy } from "@clerk/types";
 import { SignUp, useSignIn, useSignUp } from "@clerk/nextjs";
 import { useState } from "react";
 import { isNewOptions } from "@/lib/enums";
+import Navbar from "../forVisitorLayout/Navbar";
 
 const VisitorLanding = () => {
   const [isNew, setIsNew] = useState<string>(isNewOptions.N);
@@ -35,7 +36,7 @@ const VisitorLanding = () => {
 
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center ">
-      This is the visitor landing page
+      {/* This is the visitor landing page
       {(isNew === isNewOptions.N && (
         <div className="w-full h-full flex justify-center items-center flex-col gap-5">
           <button
@@ -70,7 +71,7 @@ const VisitorLanding = () => {
               Nah, I know these parts. Let me sign in!
             </button>
           </div>
-        ))}
+        ))} */}
     </div>
   );
 };

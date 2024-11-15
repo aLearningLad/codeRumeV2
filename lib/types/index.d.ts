@@ -3,3 +3,9 @@ declare type Tcollaborator = {
   unique_id: string;
   email: string;
 };
+
+declare type Inavlinks = {
+  id: number;
+  title: string;
+  uniqueLink: string;
+};
