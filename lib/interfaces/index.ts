@@ -3,3 +3,15 @@ export interface IregisterUserToDb {
   user_id: string;
   email: string;
 }
+
+export interface chatProps {
+  params: {
+    roomId: string;
+    username: string;
+  };
+}
+
+export interface Message {
+  username: string;
+  message: string;
+}

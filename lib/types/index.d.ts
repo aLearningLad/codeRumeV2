@@ -1,6 +1,5 @@
 declare type Tcollaborator = {
-  collaboratorId: string; // get this from clerk user
-  name: string;
+  friend_id: string;
+  unique_id: string;
   email: string;
-  github_link: string;
 };

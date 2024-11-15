@@ -5,25 +5,13 @@ import { Room } from "@/app/components/forCollabRoom/Room";
 import Pusher from "pusher-js";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
-import { fetchUserId } from "@/utils/fetchUserId";
 import { nanoid } from "nanoid";
-
-interface chatProps {
-  params: {
-    roomId: string;
-    username: string;
-  };
-}
-
-interface Message {
-  username: string;
-  message: string;
-}
+import sql from "@/lib/db";
+import { chatProps, Message } from "@/lib/interfaces";
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const user = useUser().user;
   const userId = useAuth().userId;
-  console.log("This is the userId from clerk: ", userId);
   const userEmail = useUser().user?.emailAddresses[0].emailAddress;
   const { roomId, username } = params;
 
@@ -35,25 +23,30 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const [email, set_email] = useState<string>(""); // this is for the collaborator being invited
   const [unique_id, set_unique_id] = useState<string | null>();
   const [clickCount, setClickCount] = useState<boolean>(false);
+  const [collaboratorList, setCollaboratorList] = useState<
+    Tcollaborator[] | any[]
+  >([]); // come back & fix this
 
   // states for invite
-  const [emailText, setEmailText] = useState<string | null>(null);
-  const [subjectLine, setSubjectLine] = useState<string>("");
-  const [sessionHost, setSessionHost] = useState(user?.username);
+  const [emailText, setEmailText] = useState<string | null>(
+    "Ay! You've been invited to a coding session!"
+  );
+  const [subjectLine, setSubjectLine] = useState<string>(
+    "Java fintech app coding session"
+  );
+  const [sessionHost, setSessionHost] = useState(user?.fullName);
   const [potentialCollaborators, setPotentialCollaborators] = useState<
     string[]
-  >([]);
-  const [startsAt, setStartsAt] = useState<string | null>(null);
-  const [primaryLang, setPrimaryLang] = useState<string | null>(null);
-  const [framework, setFramework] = useState<string | null>(null);
-  const [sessionLength, setSessionLength] = useState<string | null>(null);
-  const [expMemberCount, setExpMemberCount] = useState<number>(0);
+  >(["mocmanca@gmail.com", "leapingbulls@gmail.com"]);
+  const [startsAt, setStartsAt] = useState<string | null>("21h30");
+  const [primaryLang, setPrimaryLang] = useState<string | null>("Java");
+  const [framework, setFramework] = useState<string | null>("Springboot");
+  const [sessionLength, setSessionLength] = useState<string | null>(
+    "Around an hour"
+  );
+  const [expMemberCount, setExpMemberCount] = useState<number>(4);
 
-  // get userId from db, using email. So dep. arr is user email ====> why did I do this, when this id is the userId from clerk?? Aaargh!
-  // useEffect(() => {
-  //   fetchUserId(userEmail!);
-  // }, [hostEmail, userEmail]);
-
+  // initialize pusher for chat
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY!, {
       cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER!,
@@ -70,6 +63,26 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
       channel.unsubscribe();
     };
   }, [roomId]);
+
+  // fetch this user's collaborators & set session host
+  useEffect(() => {
+    const fetchCollaborators = async () => {
+      try {
+        const collabsData = await sql(
+          `SELECT * FROM all_collaborators WHERE friend_id = $1`,
+          [userId]
+        );
+
+        if (collabsData && collabsData.length > 0) {
+          setCollaboratorList(collabsData);
+        }
+      } catch (error) {
+        console.log("Error fetching collaborators: ", error);
+      }
+    };
+
+    fetchCollaborators();
+  }, []);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -132,7 +145,9 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
           expMemberCount,
         }),
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error sending invite info from clientside: ", error);
+    }
   };
 
   return (
@@ -140,8 +155,8 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
       <div className=" w-full min-h-screen flex flex-col bg-slate-900 ">
         <header>Invite collaborator test</header>
 
-        <section className=" flex flex-col items-center justify-center">
-          <input
+        <section className=" flex flex-col items-center justify-center h-full">
+          {/* <input
             type="text"
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -153,6 +168,13 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
             className=" bg-green-500 text-white w-fit px-4 py-2 rounded-md "
           >
             Save this collaborator
+          </button> */}
+
+          <button
+            onClick={handleInvite}
+            className=" bg-white text-black rounded-md w-fit px-5 py-2"
+          >
+            Send Invite
           </button>
         </section>
       </div>

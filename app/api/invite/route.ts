@@ -15,7 +15,18 @@ export async function POST(req: Request) {
   } = await req.json();
 
   // handle error if any data is missing
-  if (!emailText || !subjectLine || !sessionHost || !potentialCollaborators) {
+  if (
+    !emailText ||
+    !subjectLine ||
+    !sessionHost ||
+    !potentialCollaborators ||
+    !startsAt ||
+    !primaryLang ||
+    !framework ||
+    !sessionLength ||
+    !expMemberCount
+  ) {
+    console.log("Some details from client are missing!");
     return NextResponse.json(
       {
         message: "Some details from the client are missing",
