@@ -1,9 +1,11 @@
 import { navlinks } from "@/miscdata/navlinks";
 import Link from "next/link";
+import DynamicBtn from "../others/DynamicBtn";
+import OptionsBtn from "../others/OptionsBtn";
 
 const Navbar = () => {
   return (
-    <nav className="w-full z-10 bg-white sticky top-0 flex h-[10vh] xl:h-[15vh] px-3 md:px-5 py-2 md:py-3 items-center justify-between">
+    <nav className="w-full z-10 bg-white sticky top-0 flex h-[10vh] xl:h-[12vh] px-3 md:px-5 py-2 md:py-3 items-center justify-between">
       <div className="flex justify-start items-center px-2 gap-2 h-full">
         {/* HOME LINK  */}
         <Link className=" flex items-end gap-1 italic" href="/">
@@ -31,9 +33,8 @@ const Navbar = () => {
 
       {/* MOBILE LINKS & MENU BUTTON */}
       <div className="flex gap-5 h-full items-center p-2 lg:p-0">
-        {/* <DynamicBtn />
-          <OptionsBtn /> */}
-        buttons come here
+        <DynamicBtn />
+        <OptionsBtn />
       </div>
     </nav>
   );

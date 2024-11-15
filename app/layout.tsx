@@ -12,6 +12,7 @@ import {
 import VisitorLanding from "./components/forVisitors/VisitorLanding";
 import { Inter, Baskervville } from "next/font/google";
 import Navbar from "./components/forVisitorLayout/Navbar";
+import Footer from "./components/forVisitorLayout/Footer";
 
 const baskerville = Baskervville({ weight: "400", subsets: ["latin"] });
 const geistSans = localFont({
@@ -47,9 +48,10 @@ export default function RootLayout({
             href="/assets/crlogo.png"
           />
           <SignedOut>
-            <main className=" min-h-screen max-h-fit w-full bg-white flex flex-col justify-center ">
+            <main className=" w-full min-h-screen relative items-center bg-white flex flex-col ">
               <Navbar />
               <VisitorLanding />
+              <Footer />
             </main>
           </SignedOut>
           <ClerkProvider dynamic>
