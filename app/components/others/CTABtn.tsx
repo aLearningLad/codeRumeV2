@@ -46,19 +46,20 @@ const CTABtn = () => {
       <DialogTrigger className="rounded-lg lg:rounded-xl w-fit h-fit py-3 px-5 bg-black text-white">
         Get Started
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className=" p-5 lg:p-12">
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+          <DialogTitle className=" w-full flex justify-center items-center text-lg ">
+            Sign in
+          </DialogTitle>
+          <DialogDescription className=" w-full mb-5 flex justify-center items-center text-center my-3 text-black">
+            Join the codeRume and begin collaborating with friends
           </DialogDescription>
         </DialogHeader>
-        This is the visitor landing page
+
         {(isNew === isNewOptions.N && (
           <div className="w-full h-full flex justify-center items-center flex-col gap-5">
             <button
-              className=" w-3/12 h-16 bg-black text-white flex justify-center items-center"
+              className=" w-full h-16 bg-black text-white flex justify-center items-center"
               onClick={() => signInWith("oauth_google")}
             >
               Sign in with Google
