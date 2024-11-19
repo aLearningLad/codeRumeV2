@@ -32,4 +32,5 @@ declare type TtechStack = {
   techId: number;
   title: string;
   imgLink: string;
+  stackLink: string;
 };

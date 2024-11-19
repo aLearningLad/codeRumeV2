@@ -52,12 +52,13 @@ const OptionsBtn = () => {
             codeRume
           </h3>
           <div className=" w-full flex justify-around items-center">
-            {techStack.map(({ imgLink, techId, title }) => (
+            {techStack.map(({ imgLink, techId, title, stackLink }) => (
               <TechStackCard
                 imgLink={imgLink}
                 techId={techId}
                 title={title}
                 key={techId}
+                stackLink={stackLink}
               />
             ))}
           </div>
