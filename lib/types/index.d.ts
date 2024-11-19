@@ -27,3 +27,9 @@ declare type Tscalepromo = {
   icon: React.ReactElement;
   provName: string;
 };
+
+declare type TtechStack = {
+  techId: number;
+  title: string;
+  imgLink: string;
+};

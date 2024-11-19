@@ -6,6 +6,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { techStack } from "@/miscdata/techStack";
+import TechStackCard from "../forVisitorLayout/TechStackCard";
 
 const OptionsBtn = () => {
   return (
@@ -44,17 +46,20 @@ const OptionsBtn = () => {
             </p>
           </DialogDescription>
         </DialogHeader>
-        <section className=" w-full flex flex-col items-center justify-center gap-1 bg-neutral-200 rounded-2xl p-4 ">
+        <section className=" w-full flex flex-col items-center justify-center gap-1 bg-neutral-200/70 rounded-2xl p-4 ">
           <h3 className=" text-center text-[14px] ">
             Here are the documentation for some of the technology powering
             codeRume
           </h3>
           <div className=" w-full flex justify-around items-center">
-            <p>Neon</p>
-            <p>Clerk</p>
-            <p>LiveBlocks</p>
-            <p>PusherJS</p>
-            <p>Typescript</p>
+            {techStack.map(({ imgLink, techId, title }) => (
+              <TechStackCard
+                imgLink={imgLink}
+                techId={techId}
+                title={title}
+                key={techId}
+              />
+            ))}
           </div>
         </section>
       </DialogContent>
