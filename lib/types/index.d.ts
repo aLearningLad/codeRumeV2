@@ -40,4 +40,5 @@ declare type Troomnavdata = {
   optionTitle: string;
   optionLink?: string;
   optionIcon: React.ReactElement;
+  index: number;
 };

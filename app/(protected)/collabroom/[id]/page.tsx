@@ -153,9 +153,19 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
   return (
     <Room>
-      <div className=" w-full min-h-screen flex flex-col bg-slate-900 p-1 sm:p-2 md:p-5 ">
-        <section className=" w-full h-[calc(100vh-7rem)] border-4 border-yellow-400 ">
-          Contents here
+      <div className=" w-full min-h-screen flex flex-col bg-slate-900 p-1 sm:p-2 md:p-5 gap-3">
+        <section className=" w-full h-[calc(100vh-10rem)] overflow-clip rounded-3xl border-4 bg-slate-500/70 flex flex-col lg:flex-row ">
+          <section className=" w-full sm:w-[95%] md:w-[90%] lg:w-8/12 h-full flex p-2 flex-col gap-0 ">
+            {/* IDE */}
+            <Editor />
+            <div className=" w-full h-20 flex justify-start ">
+              options to save to pdf here
+            </div>
+          </section>
+
+          <section className="w-full sm:w-[95%] md:w-[90%] lg:w-4/12 h-full bg-cyan-600/50 ">
+            {/* chat section */}
+          </section>
         </section>
         <RoomNav />
 
