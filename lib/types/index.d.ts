@@ -34,3 +34,10 @@ declare type TtechStack = {
   imgLink: string;
   stackLink: string;
 };
+
+declare type Troomnavdata = {
+  optionId: string;
+  optionTitle: string;
+  optionLink?: string;
+  optionIcon: React.ReactElement;
+};

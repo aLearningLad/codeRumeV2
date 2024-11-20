@@ -8,6 +8,7 @@ import { useAuth, useUser } from "@clerk/nextjs";
 import { nanoid } from "nanoid";
 import sql from "@/lib/db";
 import { chatProps, Message } from "@/lib/interfaces";
+import RoomNav from "@/app/components/forCollabRoom/RoomNav";
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const user = useUser().user;
@@ -153,10 +154,14 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   return (
     <Room>
       <div className=" w-full min-h-screen flex flex-col bg-slate-900 p-1 sm:p-2 md:p-5 ">
-        <header className=" text-white">Invite collaborator test</header>
+        <section className=" w-full h-[calc(100vh-7rem)] border-4 border-yellow-400 ">
+          Contents here
+        </section>
+        <RoomNav />
 
-        <section className=" flex flex-col items-center justify-center h-full">
-          {/* <input
+        {/* <header className=" text-white">Invite collaborator test</header> */}
+        {/* <section className=" flex flex-col items-center justify-center h-full"> */}
+        {/* <input
             type="text"
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -170,13 +175,13 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
             Save this collaborator
           </button> */}
 
-          <button
+        {/* <button
             onClick={handleInvite}
             className=" bg-white text-black rounded-md w-fit px-5 py-2"
           >
             Send Invite
-          </button>
-        </section>
+          </button> */}
+        {/* </section> */}
       </div>
     </Room>
   );
