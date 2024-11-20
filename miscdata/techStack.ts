@@ -19,7 +19,7 @@ export const techStack: TtechStack[] = [
   },
   {
     techId: 432087,
-    imgLink: "/assets/neon.png",
+    imgLink: "/assets/pusherlogo.png",
     title: "PusherJS",
     stackLink: "https://pusher.com",
   },

@@ -47,7 +47,7 @@ const CTABtn = () => {
 
   return (
     <Dialog>
-      <DialogTrigger className="rounded-lg lg:rounded-xl w-fit h-fit py-3 px-5 bg-black text-white">
+      <DialogTrigger className="rounded-lg lg:rounded-xl hover:scale-95 transition-all duration-300 ease-in-out w-fit h-fit py-3 px-5 bg-black text-white">
         Get Started
       </DialogTrigger>
       <DialogContent className=" p-5 lg:p-12 h-[60vh] flex flex-col justify-center ">
