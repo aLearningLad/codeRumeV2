@@ -152,8 +152,8 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
   return (
     <Room>
-      <div className=" w-full min-h-screen flex flex-col bg-slate-900 ">
-        <header>Invite collaborator test</header>
+      <div className=" w-full min-h-screen flex flex-col bg-slate-900 p-1 sm:p-2 md:p-5 ">
+        <header className=" text-white">Invite collaborator test</header>
 
         <section className=" flex flex-col items-center justify-center h-full">
           {/* <input
