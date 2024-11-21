@@ -36,12 +36,16 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className=" min-h-screen w-full flex bg-slate-900 text-white ">
+    <div className=" min-h-screen w-full flex bg-slate-900 text-white gap-3 p-5 ">
       {/* left side  */}
-      <div></div>
+      <div className=" lg:flex hidden px-2 items-center justify-start relative flex-col lg:w-2/12 bg-slate-500/50 rounded-md ">
+        <button className=" w-[90%] absolute rounded-md bottom-3 hover:bg-transparent ease-in-out flex h-12 text-[14px] justify-center items-center bg-slate-950 text-white ">
+          Sign Out
+        </button>
+      </div>
 
       {/* right side  */}
-      <div></div>
+      <div className=" w-full lg:w-10/12 "></div>
     </div>
   );
 
