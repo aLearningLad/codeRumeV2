@@ -97,7 +97,13 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: input, username, roomId, sentAt }),
+      body: JSON.stringify({
+        message: input,
+        username: sessionHost,
+        roomId,
+        sentAt,
+        current_user_id: userId,
+      }),
     });
 
     setInput("");
@@ -183,13 +189,27 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
           <section className="w-full sm:w-[95%] md:w-[90%] lg:w-4/12 min-h-[25vh] lg:h-full p-2 gap-2 md:gap-3 lg:gap-5 flex flex-col">
             {/* chat section */}
-            <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-red-600 rounded-2xl ">
+            <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-slate-500/70 p-3 rounded-2xl gap-8 ">
               {/* where messages appear */}
               {messages.map((eachText: Message) => (
-                <div className=" w-full h-16 bg-yellow-300 flex flex-col">
-                  <p>{eachText.message}</p>
-                  <p>{eachText.sentAt}</p>
-                  <p>{eachText.username}</p>
+                <div
+                  className={` w-full py-1 px-3 rounded-lg ${
+                    eachText.current_user_id === userId
+                      ? " w-full bg-yellow-800 min-h-20 max-h-40 text-ellipsis flex flex-col items-start justify-center "
+                      : "w-full h-full bg-cyan-600 min-h-20 text-ellipsis max-h-40 flex flex-col items-end justify-center"
+                  } `}
+                >
+                  <section
+                    className={` ${
+                      eachText.current_user_id === userId
+                        ? " items-start"
+                        : "items-end"
+                    } w-full h-full flex flex-col `}
+                  >
+                    <p className="h-[65%] overflow-auto ">{eachText.message}</p>
+                    <p className="h-[10%]">{eachText.sentAt}</p>
+                    <p className=" h-[20%] ">{eachText.username}</p>
+                  </section>
                 </div>
               ))}
             </div>

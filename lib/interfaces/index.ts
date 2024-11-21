@@ -15,4 +15,5 @@ export interface Message {
   username: string;
   message: string;
   sentAt: string;
+  current_user_id: string;
 }
