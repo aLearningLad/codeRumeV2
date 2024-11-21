@@ -189,26 +189,36 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
           <section className="w-full sm:w-[95%] md:w-[90%] lg:w-4/12 min-h-[25vh] lg:h-full p-2 gap-2 md:gap-3 lg:gap-5 flex flex-col">
             {/* chat section */}
-            <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-slate-500/70 p-3 rounded-2xl gap-8 ">
+            <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-slate-500/70 p-3 rounded-2xl gap-8 overflow-auto ">
               {/* where messages appear */}
               {messages.map((eachText: Message) => (
                 <div
-                  className={` w-full py-1 px-3 rounded-lg ${
+                  className={` w-full py-1 px-3 rounded-lg text-white ${
                     eachText.current_user_id === userId
-                      ? " w-full bg-yellow-800 min-h-20 max-h-40 text-ellipsis flex flex-col items-start justify-center "
-                      : "w-full h-full bg-cyan-600 min-h-20 text-ellipsis max-h-40 flex flex-col items-end justify-center"
+                      ? " w-full min-h-28 max-h-60 text-ellipsis flex flex-col items-start justify-center "
+                      : "w-full min-h-24 max-h-60  text-ellipsis flex flex-col items-end justify-center"
                   } `}
                 >
                   <section
                     className={` ${
                       eachText.current_user_id === userId
-                        ? " items-start"
-                        : "items-end"
+                        ? " items-start h-full min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 bg-slate-500/60 "
+                        : "items-end bg-pink-500/30 min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 "
                     } w-full h-full flex flex-col `}
                   >
-                    <p className="h-[65%] overflow-auto ">{eachText.message}</p>
-                    <p className="h-[10%]">{eachText.sentAt}</p>
-                    <p className=" h-[20%] ">{eachText.username}</p>
+                    <p className="h-[75%] overflow-auto ">{eachText.message}</p>
+                    <span className=" flex gap-1 items-end min-w-[40%] ">
+                      <p className=" text-[8px]">by</p>
+                      <p>
+                        {eachText.current_user_id === userId ? (
+                          <p className=" text-[12px]">You</p>
+                        ) : (
+                          <p className="text-[12px]">{eachText.username}</p>
+                        )}
+                      </p>
+                      <p className="text-[8px]">@</p>
+                      <p className="text-[10px]">{eachText.sentAt}</p>
+                    </span>
                   </section>
                 </div>
               ))}
