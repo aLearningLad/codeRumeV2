@@ -11,7 +11,8 @@ import { chatProps, Message } from "@/lib/interfaces";
 import RoomNav from "@/app/components/forCollabRoom/RoomNav";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoIosSend } from "react-icons/io";
-import { FaQuestion } from "react-icons/fa";
+import { FaCrown, FaQuestion } from "react-icons/fa";
+import { IoPersonSharp } from "react-icons/io5";
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const user = useUser().user;
@@ -208,6 +209,16 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
                   >
                     <p className="h-[75%] overflow-auto ">{eachText.message}</p>
                     <span className=" flex gap-1 items-end min-w-[40%] ">
+                      <div className="">
+                        {eachText.current_user_id === userId ? (
+                          <FaCrown className=" text-yellow-500" size={20} />
+                        ) : (
+                          <IoPersonSharp
+                            className="  text-cyan-400"
+                            size={20}
+                          />
+                        )}
+                      </div>
                       <p className=" text-[8px]">by</p>
                       <p>
                         {eachText.current_user_id === userId ? (
