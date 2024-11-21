@@ -10,6 +10,7 @@ import sql from "@/lib/db";
 import { chatProps, Message } from "@/lib/interfaces";
 import RoomNav from "@/app/components/forCollabRoom/RoomNav";
 import { CiSaveDown2 } from "react-icons/ci";
+import { IoIosSend } from "react-icons/io";
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const user = useUser().user;
@@ -174,14 +175,24 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
             </div>
           </section>
 
-          <section className="w-full overflow-auto sm:w-[95%] md:w-[90%] lg:w-4/12 min-h-[25vh] lg:h-full p-2 gap-2 md:gap-3 lg:gap-5 flex flex-col">
+          <section className="w-full sm:w-[95%] md:w-[90%] lg:w-4/12 min-h-[25vh] lg:h-full p-2 gap-2 md:gap-3 lg:gap-5 flex flex-col">
             {/* chat section */}
             <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-red-600 rounded-2xl ">
               {/* where messages appear */}
             </div>
 
-            <div className=" w-full min-h-[10vh] bg-white ">
+            <div className=" w-full min-h-[10vh] bg-slate-500/50 rounded-lg py-2 px-2 lg:px-3 flex items-center justify-center gap-2 ">
               {/* where text inputs are shown */}
+              <input
+                type="text"
+                className=" w-10/12 lg:w-11/12 rounded-lg placeholder:text-neutral-500 px-2 overflow-auto h-full  "
+                placeholder="Share a thought . . ."
+              />
+              <div className=" w-2/12 lg:w-1/12 h-full ">
+                <button className=" flex h-full w-full justify-center items-center ">
+                  <IoIosSend size={30} className=" text-white " />
+                </button>
+              </div>
             </div>
           </section>
         </section>
