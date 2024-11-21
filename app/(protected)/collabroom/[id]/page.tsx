@@ -11,6 +11,7 @@ import { chatProps, Message } from "@/lib/interfaces";
 import RoomNav from "@/app/components/forCollabRoom/RoomNav";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoIosSend } from "react-icons/io";
+import { FaQuestion } from "react-icons/fa";
 
 const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const user = useUser().user;
@@ -19,6 +20,7 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const { roomId, username } = params;
 
   const [messages, setMessages] = useState<Message[]>([]);
+  const [sentAt, setSentAt] = useState<string>(new Date().toLocaleTimeString());
   const [input, setInput] = useState<string>("");
   const [newCollaboratorEmail, setNewCollaboratorEmail] = useState<string>("");
   const [hostEmail, setHostEmail] = useState<string>(userEmail!);
@@ -89,13 +91,13 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
+    setSentAt(new Date().toLocaleTimeString());
     await fetch("/api/pusher/trigger", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: input, username, roomId }),
+      body: JSON.stringify({ message: input, username, roomId, sentAt }),
     });
 
     setInput("");
@@ -165,12 +167,16 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
           <section className=" w-full sm:w-[95%] md:w-[90%] lg:w-8/12 min-h-[75vh] lg:h-full flex p-2 flex-col gap-2 ">
             {/* IDE */}
             <Editor />
-            <div className=" w-full h-20 flex justify-start ">
+            <div className=" w-full h-20 flex justify-start gap-2 lg:gap-3 ">
               <button
                 onClick={handleSaveDoc}
                 className=" w-12 h-12 rounded-lg bg-white flex justify-center items-center "
               >
                 <CiSaveDown2 size={26} className=" text-slate-600 " />
+              </button>
+
+              <button className="w-12 h-12 rounded-lg bg-white flex justify-center items-center">
+                <FaQuestion size={26} className="text-slate-600" />
               </button>
             </div>
           </section>
@@ -179,18 +185,35 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
             {/* chat section */}
             <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-red-600 rounded-2xl ">
               {/* where messages appear */}
+              {messages.map((eachText: Message) => (
+                <div className=" w-full h-16 bg-yellow-300 flex flex-col">
+                  <p>{eachText.message}</p>
+                  <p>{eachText.sentAt}</p>
+                  <p>{eachText.username}</p>
+                </div>
+              ))}
             </div>
 
             <div className=" w-full min-h-[10vh] bg-slate-500/50 rounded-lg py-2 px-2 lg:px-3 flex items-center justify-center gap-2 ">
               {/* where text inputs are shown */}
               <input
                 type="text"
-                className=" w-10/12 lg:w-11/12 rounded-lg placeholder:text-neutral-500 px-2 overflow-auto h-full  "
+                className=" w-10/12 focus:scale-95 text-[14px] placeholder:text-[14px] transition-all duration-300 ease-in-out outline-none lg:w-11/12 rounded-lg placeholder:text-neutral-500 px-2 overflow-auto h-full  "
+                value={input}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setInput(e.target.value)
+                }
                 placeholder="Share a thought . . ."
               />
               <div className=" w-2/12 lg:w-1/12 h-full ">
-                <button className=" flex h-full w-full justify-center items-center ">
-                  <IoIosSend size={30} className=" text-white " />
+                <button
+                  onClick={sendMessage}
+                  className=" flex h-full w-full justify-center items-center hover:scale-95 transition-all duration-300 ease-in-out "
+                >
+                  <IoIosSend
+                    size={30}
+                    className=" text-white hover:text-green-400 "
+                  />
                 </button>
               </div>
             </div>

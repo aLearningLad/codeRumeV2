@@ -14,4 +14,5 @@ export interface chatProps {
 export interface Message {
   username: string;
   message: string;
+  sentAt: string;
 }
