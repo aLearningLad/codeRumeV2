@@ -26,7 +26,7 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
   const [newCollaboratorEmail, setNewCollaboratorEmail] = useState<string>("");
   const [hostEmail, setHostEmail] = useState<string>(userEmail!);
   const [friend_id, set_friend_id] = useState<string>("");
-  const [email, set_email] = useState<string>(""); // this is for the collaborator being invited
+  const [email, set_email] = useState<string>(""); // this is for the collaborator being invited --> zustand
   const [unique_id, set_unique_id] = useState<string | null>();
   const [clickCount, setClickCount] = useState<boolean>(false);
   const [collaboratorList, setCollaboratorList] = useState<

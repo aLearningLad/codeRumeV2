@@ -12,16 +12,7 @@ import {
 const RoomNav = () => {
   return (
     <nav className=" h-28 w-full flex justify-center py-1 ">
-      <div className=" h-[85%] bg-slate-700/60 rounded-xl w-[90%] sm:w-[85%] lg:w-[35%] lg:px-13 flex justify-around lg:justify-center lg:gap-8 items-center">
-        {/* {roomnavdata.map(({ optionIcon, optionId, optionTitle, index }) => (
-          <RoomNavBtn
-            optionIcon={optionIcon}
-            optionId={optionId}
-            optionTitle={optionTitle}
-            key={optionId}
-            index={index}
-          />
-        ))} */}
+      <div className=" h-[85%] bg-slate-700/60 rounded-xl w-[90%] sm:w-[85%] lg:w-[35%] lg:px-13 flex justify-around lg:justify-center lg:gap-8 items-center px-2 sm:px-3 md:px-5">
         {/* invite dialog */}
         <Dialog>
           <DialogTrigger className=" w-full h-full ">
@@ -34,12 +25,13 @@ const RoomNav = () => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+              <DialogTitle className=" text-center">Invite Friends</DialogTitle>
+              <DialogDescription className=" w-full flex text-center">
+                Send an email invitation to your collaborators. They will
+                receive a link to join this room.
               </DialogDescription>
             </DialogHeader>
+            <section className=" w-full h-[60vh] "></section>
           </DialogContent>
         </Dialog>
 
@@ -76,10 +68,13 @@ const RoomNav = () => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+              <DialogTitle className=" text-center">
+                Are you absolutely sure?
+              </DialogTitle>
+              <DialogDescription className=" text-center text-black">
+                This will end the current codeRume session. All code not saved
+                to a textfile on your system will be lost. You can upgrade your
+                membership to enable code storage on codeRume's database.
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
