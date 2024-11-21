@@ -1,6 +1,7 @@
 import RegisterUserToDb from "@/app/components/forProfile/RegisterUserToDb";
 import sql from "@/lib/db";
 import client from "@/lib/db";
+import { UserProfile } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 
 const ProfilePage = async () => {
@@ -35,10 +36,20 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className=" min-h-screen w-full flex justify-center items-center bg-slate-900 text-white ">
-      You're registered on the DB!
+    <div className=" min-h-screen w-full flex bg-slate-900 text-white ">
+      {/* left side  */}
+      <div></div>
+
+      {/* right side  */}
+      <div></div>
     </div>
   );
+
+  // return (
+  //   <div className=" w-full h-screen bg-slate-950 flex justify-center items-center ">
+  //     <UserProfile />
+  //   </div>
+  // );
 };
 
 export default ProfilePage;

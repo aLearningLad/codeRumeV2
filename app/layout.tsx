@@ -13,6 +13,7 @@ import VisitorLanding from "./components/forVisitors/VisitorLanding";
 import { Inter, Baskervville } from "next/font/google";
 import Navbar from "./components/forVisitorLayout/Navbar";
 import Footer from "./components/forVisitorLayout/Footer";
+import { Toaster } from "react-hot-toast";
 
 const baskerville = Baskervville({ weight: "400", subsets: ["latin"] });
 const geistSans = localFont({
@@ -41,6 +42,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={baskerville.className}>
+          <Toaster />
           <link
             rel="icon"
             sizes="<generated>"
