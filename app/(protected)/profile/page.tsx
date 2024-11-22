@@ -64,15 +64,22 @@ const ProfilePage = async () => {
           Profile details
         </header>
         {/* top */}
-        <section className=" h-[20vh] w-full flex  ">
-          <div>Profile</div>
-          <div>
+        <section className=" h-[15vh] w-full flex border-b-2 border-slate-500/30  ">
+          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center text-[14px]">
+            Profile
+          </div>
+          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center gap-7">
             <Image
-              width={26}
-              height={26}
+              width={80}
+              height={80}
               src={(userImg as string) || "/assets/crlogo.png"}
               alt="user profile image"
+              className=" rounded-full overflow-clip "
             />
+            <p className=" text-xl lg:text-[14px] ">{user?.fullName}</p>
+          </div>
+          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center text-[14px]">
+            Edit Profile
           </div>
         </section>
         {/* middle  */}
