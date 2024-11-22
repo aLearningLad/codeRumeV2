@@ -4,10 +4,14 @@ import sql from "@/lib/db";
 import client from "@/lib/db";
 import { UserProfile } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
 
 const ProfilePage = async () => {
   //   // get user from clerk
   const user = await currentUser();
+  const userImg = user?.imageUrl;
+
+  // console.log("This is the user object from clerk: ", user);
 
   // check that user is not in db
   const result = await sql(`SELECT * FROM all_users WHERE user_id = $1`, [
@@ -55,7 +59,26 @@ const ProfilePage = async () => {
       </div>
 
       {/* right side  */}
-      <div className=" w-full lg:w-10/12 bg-slate-500/10 rounded-lg "></div>
+      <div className=" w-full lg:w-10/12 bg-slate-500/10 rounded-lg flex flex-col p-5">
+        <header className=" w-full text-start text-xl  border-b-2 border-slate-500/40 mb-12">
+          Profile details
+        </header>
+        {/* top */}
+        <section className=" h-[20vh] w-full flex  ">
+          <div>Profile</div>
+          <div>
+            <Image
+              width={26}
+              height={26}
+              src={(userImg as string) || "/assets/crlogo.png"}
+              alt="user profile image"
+            />
+          </div>
+        </section>
+        {/* middle  */}
+
+        {/* bottom */}
+      </div>
     </div>
   );
 

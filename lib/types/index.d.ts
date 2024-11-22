@@ -42,3 +42,10 @@ declare type Troomnavdata = {
   optionIcon: React.ReactElement;
   index: number;
 };
+
+export type Tupcoming = {
+  featureId: string;
+  featureTitle: string;
+  featureDesc: string;
+  featureLikelihood: string; // out of 5
+};

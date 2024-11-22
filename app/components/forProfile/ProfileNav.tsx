@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { ImGithub } from "react-icons/im";
 import Image from "next/image";
+import { upcoming } from "@/miscdata/upcoming";
 
 const ProfileNav = () => {
   const [isTabSelected, setIsTabSelected] = useState<string>(
@@ -36,17 +37,39 @@ const ProfileNav = () => {
         >
           Advanced Features
         </DialogTrigger>
-        <DialogContent className=" h-[60vh] flex flex-col justify-center ">
+        <DialogContent className=" h-[80vh] flex flex-col justify-center ">
           <DialogHeader>
-            <DialogTitle className=" text-center ">
+            <DialogTitle className=" text-center text-3xl md:text-2xl lg:text-lg  ">
               Upcoming Feature Notice
             </DialogTitle>
-            <DialogDescription className=" text-center">
+            <DialogDescription className=" text-center text-black lg:text-[14px] text-lg ">
               Below is a list of features that are either being developed, or
               are shortlisted for implementation into later versions of
               codeRume&copy;.
             </DialogDescription>
           </DialogHeader>
+          <div className="rounded-2xl bg-slate-500/10 p-5">
+            <section className=" w-full h-[40vh] mt-6  overflow-auto flex flex-col items-center gap-5 p-3 ">
+              {upcoming.map(
+                ({
+                  featureDesc,
+                  featureId,
+                  featureLikelihood,
+                  featureTitle,
+                }) => (
+                  <div className=" w-full flex flex-col lg:min-h-26 max-h-fit text-center mb-10 lg:mb-16">
+                    <h1 className=" text-2xl lg:text-lg font-semibold">
+                      {featureTitle}
+                    </h1>
+                    <p className="text-[14px] mb-2">{featureDesc}</p>
+                    <p className=" text-[12px] ">
+                      Feature likelihood: {featureLikelihood}/5
+                    </p>
+                  </div>
+                )
+              )}
+            </section>
+          </div>
         </DialogContent>
       </Dialog>
 

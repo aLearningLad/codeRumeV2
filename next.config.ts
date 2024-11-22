@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    domains: ["img.clerk.com"], // Add allowed domains here
+  },
 };
 
 export default nextConfig;
