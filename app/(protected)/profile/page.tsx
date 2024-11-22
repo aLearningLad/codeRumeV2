@@ -6,6 +6,10 @@ import { UserProfile } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { FaPlus } from "react-icons/fa";
+import { IoMdMailUnread } from "react-icons/io";
+import { IoSettingsSharp } from "react-icons/io5";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaLayerGroup } from "react-icons/fa6";
 
 const ProfilePage = async () => {
   //   // get user from clerk
@@ -60,13 +64,13 @@ const ProfilePage = async () => {
       </div>
 
       {/* right side  */}
-      <div className=" w-full lg:w-10/12 bg-slate-500/10 rounded-lg flex flex-col p-5">
+      <div className=" w-full lg:w-10/12 bg-slate-500/10 rounded-lg flex flex-col p-5 overflow-auto ">
         <header className=" w-full text-start text-xl  border-b-2 border-slate-500/40 mb-12">
           Profile details
         </header>
         {/* top */}
-        <section className=" h-[15vh] w-full flex border-b-2 border-slate-500/30 mb-4  ">
-          <div className=" w-full lg:w-3/12 h-full flex justify-start items-center text-[14px]">
+        <section className=" py-12 lg:py-0 lg:h-[15vh] w-full flex flex-col lg:flex-row border-b-2 border-slate-500/30 mb-4 gap-6 lg:gap-0  ">
+          <div className=" w-full lg:w-3/12 h-full flex justify-start items-center text-2xl sm:text-xl md:text-lg lg:text-[14px]">
             Profile
           </div>
           <div className=" w-full lg:w-5/12 h-full flex justify-start items-center gap-7">
@@ -80,12 +84,24 @@ const ProfilePage = async () => {
             <p className=" text-xl lg:text-[14px] ">{user?.fullName}</p>
           </div>
           <div className=" w-full lg:w-4/12 h-full flex justify-start items-center text-[14px]">
-            Edit Profile
+            <button className=" h-20 lg:h-10 w-full sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 px-12 bg-slate-500/20 group hover:bg-white hover:text-black transition-all duration-300 ease-in-out rounded-md flex justify-center items-center gap-1 ">
+              <IoSettingsSharp
+                size={20}
+                className=" text-white group-hover:text-black "
+              />
+              Edit Profile
+            </button>
           </div>
         </section>
+
         {/* middle  */}
-        <section className=" w-full flex h-[35vh] border-b-2 border-slate-500/20  ">
-          <div className=" lg:w-3/12 w-full h-full">Email addresses</div>
+        <section className=" w-full flex flex-col lg:flex-row lg:py-0 py-12 lg:h-[25vh] border-b-2 border-slate-500/20 mb-4 ">
+          <div className=" lg:w-3/12 w-full h-full items-start flex gap-2 ">
+            <div className="flex items-center gap-2 ">
+              <p className="text-xl lg:text-[14px] ">Email addresses</p>
+              <IoMdMailUnread size={12} className=" text-white " />
+            </div>
+          </div>
           <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
             {user?.emailAddresses.map((anEmail, index) => (
               <span
@@ -101,14 +117,73 @@ const ProfilePage = async () => {
                 <div className=" w-[4px] h-[4px] rounded-full bg-green-400 " />
               </span>
             ))}
-            <button className="flex gap-2 items-center justify-center mt-5 px-8 h-8 bg-slate-500/20 rounded-md ">
-              <FaPlus size={12} className=" text-white " />
+            <button className="flex w-full h-20 lg:h-10 sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 bg-slate-500/20 rounded-md ">
+              <FaPlus
+                size={12}
+                className=" text-white group-hover:text-black "
+              />
               <p className=" text-[12px] ">Add an email address</p>
             </button>
           </div>
         </section>
 
         {/* bottom */}
+        <section className=" w-full flex flex-col lg:flex-row h-[25vh] py-4 lg:py-0 border-b-2 border-slate-500/20 mb-4 ">
+          <div className=" lg:w-3/12 w-full h-full flex items-start  gap-2 ">
+            <div className=" flex items-center gap-2">
+              <p className=" text-xl lg:text-[14px] ">Phone numbers</p>
+              <BsFillTelephoneFill size={12} className=" text-white " />
+            </div>
+          </div>
+          <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
+            {user?.phoneNumbers && user?.phoneNumbers.length > 0 ? (
+              user?.phoneNumbers.map((eachNumber) => (
+                <div key={eachNumber.id} className="">
+                  {eachNumber.phoneNumber}
+                </div>
+              ))
+            ) : (
+              <div className=" w-full flex flex-col gap-2 items-start">
+                You don't currently have any phone numbers <br /> attached to
+                this account
+                <button className="flex hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 h-20 lg:h-10 bg-slate-500/20 rounded-md ">
+                  <FaPlus
+                    size={12}
+                    className=" text-white group-hover:text-black "
+                  />
+                  <p className=" text-[12px] ">Add a phone number</p>
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* the pits */}
+        <section className=" w-full flex lg:flex-row flex-col items-center justify-around lg:h-fit h-[20vh] ">
+          <div className="lg:w-3/12 w-full flex items-center  gap-2">
+            <p className=" text-xl lg:text-[14px] ">Collaborators</p>
+            <FaLayerGroup />
+          </div>
+
+          <div className=" w-full lg:w-9/12 flex gap-3 items-center justify-start">
+            <span>collaborators shown here</span>
+          </div>
+          <div className=" w-full md:w-8/12 lg:w-1/2 ">
+            <label htmlFor="" className=" text-lg lg:text-[14px] ">
+              Register a collaborator
+            </label>
+            <div className=" flex gap-1 ">
+              <input
+                className=" w-full focus:scale-95 transition-all duration-300 ease-in-out text-lg lg:text-[14px] placeholder:text-[12px] sm:w-10/12 md:w-10/12 lg:w-8/12 h-20 lg:h-12 py-1 rounded-sm outline-none px-2 bg-slate-500/20"
+                type="text"
+                placeholder="Eg. thatCoder@gmail.com"
+              />
+              <button className=" w-fit h-fit p-3 bg-white rounded-sm text-black">
+                <FaPlus size={14} />
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
