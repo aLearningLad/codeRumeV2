@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Link from "next/link";
 
 const ProfileNav = () => {
   const [isTabSelected, setIsTabSelected] = useState<string>(
@@ -59,12 +60,27 @@ const ProfileNav = () => {
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogTitle>About this app</DialogTitle>
             <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              View the source code for this platform on Github, or visit the
+              developer's portfolio & learn more about them, their previous
+              work, and their future plans
             </DialogDescription>
           </DialogHeader>
+          <section className=" w-full flex items-center justify-normal gap-5 ">
+            <Link
+              className=" w-full h-44 rounded-lg bg-slate-950 text-white flex justify-center items-center"
+              href={"#"}
+            >
+              Github
+            </Link>
+            <Link
+              className=" w-full h-44 rounded-lg bg-slate-950 text-white flex justify-center items-center"
+              href={"#"}
+            >
+              Github
+            </Link>
+          </section>
         </DialogContent>
       </Dialog>
     </section>
