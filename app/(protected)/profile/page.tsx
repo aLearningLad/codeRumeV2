@@ -5,6 +5,7 @@ import client from "@/lib/db";
 import { UserProfile } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { FaPlus } from "react-icons/fa";
 
 const ProfilePage = async () => {
   //   // get user from clerk
@@ -64,11 +65,11 @@ const ProfilePage = async () => {
           Profile details
         </header>
         {/* top */}
-        <section className=" h-[15vh] w-full flex border-b-2 border-slate-500/30  ">
-          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center text-[14px]">
+        <section className=" h-[15vh] w-full flex border-b-2 border-slate-500/30 mb-4  ">
+          <div className=" w-full lg:w-3/12 h-full flex justify-start items-center text-[14px]">
             Profile
           </div>
-          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center gap-7">
+          <div className=" w-full lg:w-5/12 h-full flex justify-start items-center gap-7">
             <Image
               width={80}
               height={80}
@@ -78,11 +79,34 @@ const ProfilePage = async () => {
             />
             <p className=" text-xl lg:text-[14px] ">{user?.fullName}</p>
           </div>
-          <div className=" w-full lg:w-1/3 h-full flex justify-start items-center text-[14px]">
+          <div className=" w-full lg:w-4/12 h-full flex justify-start items-center text-[14px]">
             Edit Profile
           </div>
         </section>
         {/* middle  */}
+        <section className=" w-full flex h-[35vh] border-b-2 border-slate-500/20  ">
+          <div className=" lg:w-3/12 w-full h-full">Email addresses</div>
+          <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
+            {user?.emailAddresses.map((anEmail, index) => (
+              <span
+                key={anEmail.id}
+                className=" flex items-center justify-center gap-1"
+              >
+                {anEmail.emailAddress}
+                {index === 0 && (
+                  <p className=" text-[10px] text-neutral-400 font-light ">
+                    Primary
+                  </p>
+                )}
+                <div className=" w-[4px] h-[4px] rounded-full bg-green-400 " />
+              </span>
+            ))}
+            <button className="flex gap-2 items-center justify-center mt-5 px-8 h-8 bg-slate-500/20 rounded-md ">
+              <FaPlus size={12} className=" text-white " />
+              <p className=" text-[12px] ">Add an email address</p>
+            </button>
+          </div>
+        </section>
 
         {/* bottom */}
       </div>
