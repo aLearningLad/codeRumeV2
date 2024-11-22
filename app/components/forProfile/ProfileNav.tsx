@@ -24,11 +24,7 @@ const ProfileNav = () => {
       {/* profile */}
       <button
         onClick={() => setIsTabSelected(profileNavTabOptions.PR)}
-        className={` w-full h-12 ${
-          isTabSelected === profileNavTabOptions.PR
-            ? " bg-neutral-100/10 text-white"
-            : "bg-slate-950/30 text-white"
-        }  rounded-md flex items-center justify-center text-[14px] `}
+        className={` w-full h-12 bg-black text-white hover:text-white hover:scale-95 transition-all duration-300 ease-in-out  rounded-md flex items-center justify-center text-[14px] `}
       >
         Profile
       </button>
@@ -36,16 +32,19 @@ const ProfileNav = () => {
       {/* advanced features */}
       <Dialog>
         <DialogTrigger
-          className={` w-full my-5 h-12 bg-slate-950/30 text-white rounded-md flex items-center justify-center text-[14px] `}
+          className={` w-full my-5 h-12 text-slate-950 bg-white hover:bg-green-500 hover:text-white hover:scale-95 transition-all duration-300 ease-in-out rounded-md flex items-center justify-center text-[14px] `}
         >
-          <button>Advanced Features</button>
+          Advanced Features
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className=" h-[60vh] flex flex-col justify-center ">
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+            <DialogTitle className=" text-center ">
+              Upcoming Feature Notice
+            </DialogTitle>
+            <DialogDescription className=" text-center">
+              Below is a list of features that are either being developed, or
+              are shortlisted for implementation into later versions of
+              codeRume&copy;.
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
@@ -54,16 +53,18 @@ const ProfileNav = () => {
       {/* about */}
       <Dialog>
         <DialogTrigger
-          className={` w-full h-12 bg-slate-950/30 text-white rounded-md flex items-center justify-center text-[14px] `}
+          className={` w-full h-12 text-slate-950 bg-white hover:bg-orange-500 hover:text-white hover:scale-95 transition-all duration-300 ease-in-out rounded-md flex items-center justify-center text-[14px] `}
         >
           <button onClick={() => setIsTabSelected(profileNavTabOptions.AB)}>
             About
           </button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className=" h-[60vh] flex flex-col justify-center">
           <DialogHeader>
-            <DialogTitle>About this app</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className=" text-center">
+              About this app & {"it's"} developer
+            </DialogTitle>
+            <DialogDescription className=" text-center text-black">
               View the source code for this platform on Github, or visit the
               developer's portfolio & learn more about them, their previous
               work, and their future plans
