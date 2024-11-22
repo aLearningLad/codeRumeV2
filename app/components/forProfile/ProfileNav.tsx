@@ -11,6 +11,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Link from "next/link";
+import { ImGithub } from "react-icons/im";
+import Image from "next/image";
 
 const ProfileNav = () => {
   const [isTabSelected, setIsTabSelected] = useState<string>(
@@ -69,16 +71,28 @@ const ProfileNav = () => {
           </DialogHeader>
           <section className=" w-full flex items-center justify-normal gap-5 ">
             <Link
-              className=" w-full h-44 rounded-lg bg-slate-950 text-white flex justify-center items-center"
+              className=" w-full hover:scale-105 transition-all duration-300 ease-in-out h-44 rounded-lg bg-slate-950 text-white flex flex-col gap-3 justify-center items-center"
               href={"#"}
             >
-              Github
+              <ImGithub size={60} className=" text-white" />
+              <p className=" text-[12px] text-white font-light">
+                View source code
+              </p>
             </Link>
             <Link
-              className=" w-full h-44 rounded-lg bg-slate-950 text-white flex justify-center items-center"
+              className=" w-full hover:scale-105 transition-all duration-300 ease-in-out h-44 rounded-lg flex-col gap-3 bg-slate-950 text-white flex justify-center items-center"
               href={"#"}
             >
-              Github
+              <Image
+                alt="codeRume logo"
+                src="/assets/crlogo.png"
+                width={60}
+                height={60}
+                className=" rounded-full bg-white"
+              />
+              <p className=" text-[12px] text-white font-light">
+                About the developer
+              </p>
             </Link>
           </section>
         </DialogContent>
