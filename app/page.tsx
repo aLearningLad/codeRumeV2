@@ -17,6 +17,8 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import sql from "@/lib/db";
 import RegisterCollabBtn from "./components/forHome/RegisterCollabBtn";
+import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
+import DeleteCollabBtn from "./components/forHome/DeleteCollabBtn";
 
 // import { useEffect, useState } from "react";
 
@@ -137,7 +139,45 @@ export default async function Home() {
                       </DialogHeader>
                       <section className=" w-full h-[70vh] overflow-auto flex flex-col items-center ">
                         {collabsData && collabsData.length > 0 ? (
-                          <div>Show them all here!</div>
+                          <div className=" w-full h-full flex-col flex ">
+                            <div className=" w-full h-[60%] bg-neutral-400/30 rounded-lg flex flex-col p-2 ">
+                              <h3>Your current collaborators list</h3>
+                              <div className=" w-full h-full p-2 gap-5 sm:gap-4 md:gap-3 flex flex-col overflow-auto bg-slate-950 rounded-lg text-white">
+                                {collabsData.map((card: any) => (
+                                  <div
+                                    className=" min-h-12 flex bg-slate-500/50 rounded-md py-1 px-3"
+                                    key={card.unique_id}
+                                  >
+                                    <div className=" flex items-center h-full">
+                                      <FaUserCheck size={20} />
+                                    </div>
+                                    <p className=" w-full h-full flex justify-center items-center">
+                                      {card.email}
+                                    </p>
+                                    <DeleteCollabBtn
+                                      key={card.unique_id}
+                                      unique_id={card.unique_id}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            <h3 className=" text-black text-center mt-3 ">
+                              You can easily register even more collaborators
+                            </h3>
+                            <div>
+                              {/* inputs  */}
+                              <div className=" w-full h-[40%]">
+                                <label
+                                  className=" text-lg lg:text-[14px] "
+                                  htmlFor=""
+                                >
+                                  Email
+                                </label>
+                                <RegisterCollabBtn />
+                              </div>
+                            </div>
+                          </div>
                         ) : (
                           <div className=" h-full flex w-full flex-col text-center justify-center items-center ">
                             <h2 className=" text-2xl font-semibold  ">

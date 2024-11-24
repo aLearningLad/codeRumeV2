@@ -1,15 +1,44 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import sql from "@/lib/db";
+import { useAuth } from "@clerk/nextjs";
+import { nanoid } from "nanoid";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const RegisterCollabBtn = () => {
   const [email, setEmail] = useState<string>();
+  const [unique_id, set_unique_id] = useState<string | null>();
+  const [clickCount, setClickCount] = useState<boolean>(false);
+
+  const userId = useAuth().userId;
+  const router = useRouter();
+
+  // refresh the unique_id value everytime the page loads, and everytime saveCollaborator() is called
+  useEffect(() => {
+    const uniqueValue = nanoid();
+    set_unique_id(uniqueValue);
+  }, [clickCount]);
 
   // save new collaborator to DB
-  const handleRegisterCollab = async () => {
+  const saveCollaborator = async () => {
+    setClickCount((prev) => !prev);
+
     try {
+      const collabSaveResults = await fetch("/api/saveCollaborator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          unique_id,
+          userId,
+          email,
+        }),
+      });
+      router.refresh();
     } catch (error) {
-      console.log("Error while registering new collaborator: ", error);
+      console.log("Error while saving collaborator to db: ", error);
     }
   };
 
@@ -24,7 +53,10 @@ const RegisterCollabBtn = () => {
           setEmail(e.target.value)
         }
       />
-      <button className=" hover:bg-slate-950 hover:scale-95 transition-all duration-300 ease-in-out w-full text-lg bg-green-500 text-white h-16 rounded-lg ">
+      <button
+        onClick={saveCollaborator}
+        className=" hover:bg-slate-950 hover:scale-95 transition-all duration-300 ease-in-out w-full text-lg bg-green-500 text-white h-16 rounded-lg "
+      >
         Register
       </button>
     </div>

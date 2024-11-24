@@ -17,3 +17,7 @@ export interface Message {
   sentAt: string;
   current_user_id: string;
 }
+
+export interface IDeleteCollabBtn {
+  unique_id: string;
+}
