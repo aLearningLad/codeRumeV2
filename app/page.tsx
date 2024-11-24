@@ -19,6 +19,8 @@ import sql from "@/lib/db";
 import RegisterCollabBtn from "./components/forHome/RegisterCollabBtn";
 import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
 import DeleteCollabBtn from "./components/forHome/DeleteCollabBtn";
+import { GiTronArrow } from "react-icons/gi";
+import { nanoid } from "nanoid";
 
 // import { useEffect, useState } from "react";
 
@@ -110,7 +112,7 @@ export default async function Home() {
                 squareId === "okJ92Hbs" ? (
                   <Dialog>
                     <DialogTrigger>
-                      <div className=" hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 ">
+                      <div className=" hover:bg-cyan-500/30 cursor-pointer mt-8 hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 ">
                         <div className=" group-hover:hidden">{squareIcon}</div>
                         <h3 className=" text-2xl lg:text-lg group-hover:hidden">
                           {squareTitle}
@@ -141,7 +143,9 @@ export default async function Home() {
                         {collabsData && collabsData.length > 0 ? (
                           <div className=" w-full h-full flex-col flex ">
                             <div className=" w-full h-[60%] bg-neutral-400/30 rounded-lg flex flex-col p-2 ">
-                              <h3>Your current collaborators list</h3>
+                              <h3 className=" text-center mb-2">
+                                Your current collaborators list
+                              </h3>
                               <div className=" w-full h-full p-2 gap-5 sm:gap-4 md:gap-3 flex flex-col overflow-auto bg-slate-950 rounded-lg text-white">
                                 {collabsData.map((card: any) => (
                                   <div
@@ -210,7 +214,9 @@ export default async function Home() {
                   <Link
                     href={squarehref as string}
                     key={squareId}
-                    className=" hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 "
+                    className={` ${
+                      squareId === "jd7777181" && "mt-8"
+                    } hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 `}
                   >
                     <div className=" group-hover:hidden">{squareIcon}</div>
                     <h3 className=" text-2xl lg:text-lg group-hover:hidden">
@@ -232,6 +238,61 @@ export default async function Home() {
           </div>
 
           {/* right side with video */}
+          <div className=" hidden h-[60vh] lg:flex w-5/12 flex-row ">
+            <video
+              src="/assets/feedvid1.mp4"
+              width={1920}
+              height={1080}
+              autoPlay={true}
+              controls={false}
+              loop
+              muted
+              className=" w-fit overflow-clip rounded-xl  "
+            />
+            <div className=" h-full flex flex-col text-start pl-3">
+              <h2 className=" text-2xl">
+                <b>codeRume&copy;</b>
+                as a networking site
+              </h2>
+              <h3>
+                Explore other facets of programming. Perhaps try centering your
+                codeRume&copy; session chats around topics such as:
+              </h3>
+              <ol className=" flex flex-col gap-5 mb-7">
+                <li className=" flex gap-2 text-start items-center w-full">
+                  <GiTronArrow /> Systems design
+                </li>
+                <li className=" flex gap-2 text-start items-center w-full">
+                  <GiTronArrow />
+                  Data (collecting, cleaning & saving)
+                </li>
+                <li className=" flex gap-2 text-start items-center w-full">
+                  <GiTronArrow />
+                  Interview prep via algorithmic thinking & problem solving
+                </li>
+                <li className=" flex gap-2 text-start items-center w-full">
+                  <GiTronArrow />
+                  Data structure usage and tradeoffs
+                </li>
+                <li className=" flex gap-2 text-start items-center w-full">
+                  <GiTronArrow />
+                  Machine learning, choosing models to train, and tradeoffs
+                </li>
+              </ol>
+              <p className=" mb-5">
+                {" "}
+                . . . and inumerable other topics to liven up your
+                codeRume&copy; sessions
+              </p>
+
+              <Link
+                className=" w-8/12 bg-white rounded-md flex justify-center items-center text-black "
+                href={`/collabroom/${nanoid()}`}
+              >
+                Take me there!
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* <section className="w-full xl:w-8/12 flex flex-col text-center xl:text-start">

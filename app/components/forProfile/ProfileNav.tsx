@@ -30,6 +30,13 @@ const ProfileNav = () => {
         Profile
       </button>
 
+      <Link
+        href={"/"}
+        className={` w-full my-3 h-12 text-slate-950 bg-white hover:bg-yellow-400 hover:text-white hover:scale-95 transition-all duration-300 ease-in-out rounded-md flex items-center justify-center text-[14px] `}
+      >
+        Home
+      </Link>
+
       {/* advanced features */}
       <Dialog>
         <DialogTrigger
