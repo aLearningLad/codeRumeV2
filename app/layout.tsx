@@ -58,7 +58,9 @@ export default function RootLayout({
           </SignedOut>
           <ClerkProvider dynamic>
             <SignedIn>
-              <Providers>{children}</Providers>
+              <main className=" w-full min-h-screen bg-slate-900 p-2 md:p-3 lg:p-5">
+                <Providers>{children}</Providers>
+              </main>
             </SignedIn>
           </ClerkProvider>
         </body>

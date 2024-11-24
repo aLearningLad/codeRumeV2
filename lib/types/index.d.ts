@@ -43,9 +43,22 @@ declare type Troomnavdata = {
   index: number;
 };
 
-export type Tupcoming = {
+declare type Tupcoming = {
   featureId: string;
   featureTitle: string;
   featureDesc: string;
   featureLikelihood: string; // out of 5
+};
+
+declare type Tsquares = {
+  id: number;
+  title: string;
+  desc: string;
+};
+
+declare type Tnewsquares = {
+  squareId: string;
+  squareTitle: string;
+  squareBlurb: string;
+  squareHoverPrompt: string;
 };
