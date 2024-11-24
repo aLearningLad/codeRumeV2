@@ -61,4 +61,5 @@ declare type Tnewsquares = {
   squareTitle: string;
   squareBlurb: string;
   squareHoverPrompt: string;
+  squareIcon: React.ReactElement;
 };

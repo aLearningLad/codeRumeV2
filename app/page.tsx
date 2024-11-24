@@ -1,5 +1,6 @@
 // "use client";
 
+import { newsquares } from "@/miscdata/newsquares";
 import { squares } from "@/miscdata/squares";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Image from "next/image";
@@ -74,11 +75,27 @@ export default function Home() {
         <section className=" flex ">
           {/* left side squares */}
           <div className=" w-full px-3 sm:px-5 md:px-7 lg:px-12 gap-5 py-5 lg:w-7/12 grid grid-cols-1 md:grid-cols-2 ">
-            {falsesquares.map((square) => (
-              <div className=" w-full min-h-52 rounded-md bg-slate-50/60">
-                a square
-              </div>
-            ))}
+            {newsquares.map(
+              ({
+                squareBlurb,
+                squareHoverPrompt,
+                squareIcon,
+                squareId,
+                squareTitle,
+              }) => (
+                <div
+                  key={squareId}
+                  className=" w-full flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded- lgbg-slate-500/60 "
+                >
+                  <h3 className=" group-hover:hidden">{squareTitle}</h3>
+                  <p className=" group-hover:hidden">{squareBlurb}</p>
+
+                  <p className=" hidden group-hover:flex">
+                    {squareHoverPrompt}
+                  </p>
+                </div>
+              )
+            )}
           </div>
 
           {/* right side with video */}
