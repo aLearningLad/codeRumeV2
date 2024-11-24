@@ -4,9 +4,22 @@ import { newsquares } from "@/miscdata/newsquares";
 import { squares } from "@/miscdata/squares";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import Link from "next/link";
+import { MdOutlineStart } from "react-icons/md";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { currentUser } from "@clerk/nextjs/server";
+import sql from "@/lib/db";
+
 // import { useEffect, useState } from "react";
 
-export default function Home() {
+export default async function Home() {
   // const [emailBody, setEmailBody] = useState<string>(
   //   "Hi there! If you recieve this, it means your email sender service is working!"
   // );
@@ -50,8 +63,13 @@ export default function Home() {
   //     console.log("Error while sending email: ", error);
   //   }
   // };
+  const user = await currentUser();
+  const userId = user?.id;
 
-  const falsesquares = [1, 2, 3, 4];
+  const collabsData = await sql(
+    `SELECT * FROM all_collaborators WHERE friend_id = $1`,
+    [userId]
+  );
 
   return (
     <main className=" w-full flex-col bg-slate-900 text-white flex">
@@ -67,7 +85,7 @@ export default function Home() {
             Collaborative coding <br className=" xl:flex hidden" /> made a
             little easier
           </h1>
-          <p className=" text-[26px] pb-6 xl:pb-0">
+          <p className=" text-[26px] pb-6 xl:pb-0 text-center lg:text-start">
             For developers, by a developer
           </p>
         </header>
@@ -82,19 +100,62 @@ export default function Home() {
                 squareIcon,
                 squareId,
                 squareTitle,
-              }) => (
-                <div
-                  key={squareId}
-                  className=" w-full flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded- lgbg-slate-500/60 "
-                >
-                  <h3 className=" group-hover:hidden">{squareTitle}</h3>
-                  <p className=" group-hover:hidden">{squareBlurb}</p>
+                squarehref,
+              }) =>
+                squareId === "okJ92Hbs" ? (
+                  <Dialog>
+                    <DialogTrigger>
+                      <div className=" hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 ">
+                        <div className=" group-hover:hidden">{squareIcon}</div>
+                        <h3 className=" text-2xl lg:text-lg group-hover:hidden">
+                          {squareTitle}
+                        </h3>
+                        <p className=" text-xl lg:text-[14px] group-hover:hidden">
+                          {squareBlurb}
+                        </p>
+                        <div className=" hidden p-2 items-center justify-center group-hover:flex-col gap-2 group-hover:flex h-[70%] w-full sm:w-10/12 md:w-8/12 rounded-lg text-white ">
+                          <MdOutlineStart size={40} />
+                          <p className=" text-xl lg:text-lg ">
+                            {squareHoverPrompt}
+                          </p>
+                        </div>
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle className=" ">
+                          Curate collaborator list
+                        </DialogTitle>
+                        <DialogDescription className=" text-black text-center ">
+                          Carefully manage your list of friends. People you can
+                          invite at any time to help you during your coding
+                          sessions
+                        </DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                ) : (
+                  <Link
+                    href={squarehref as string}
+                    key={squareId}
+                    className=" hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 "
+                  >
+                    <div className=" group-hover:hidden">{squareIcon}</div>
+                    <h3 className=" text-2xl lg:text-lg group-hover:hidden">
+                      {squareTitle}
+                    </h3>
+                    <p className=" text-xl lg:text-[14px] group-hover:hidden">
+                      {squareBlurb}
+                    </p>
 
-                  <p className=" hidden group-hover:flex">
-                    {squareHoverPrompt}
-                  </p>
-                </div>
-              )
+                    <div className=" hidden p-2 items-center justify-center group-hover:flex-col gap-2 group-hover:flex h-[70%] w-full sm:w-10/12 md:w-8/12 rounded-lg text-white ">
+                      <MdOutlineStart size={40} />
+                      <p className=" text-xl lg:text-lg ">
+                        {squareHoverPrompt}
+                      </p>
+                    </div>
+                  </Link>
+                )
             )}
           </div>
 

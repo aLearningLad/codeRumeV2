@@ -4,6 +4,8 @@ import {
   FaBookMedical,
 } from "react-icons/fa6";
 import { TfiMoreAlt } from "react-icons/tfi";
+import { MdMore } from "react-icons/md";
+import { nanoid } from "nanoid";
 
 // 1. open a room
 // 2. prepare collaborator list
@@ -22,27 +24,30 @@ export const newsquares: Tnewsquares[] = [
     squareTitle: "Open a codeRume",
     squareBlurb: "Start a new collaborative coding session",
     squareHoverPrompt: "Start Now",
-    squareIcon: <FaBookOpenReader />,
+    squareIcon: <FaBookOpenReader size={50} className=" text-cyan-400 " />,
+    squarehref: `/collabroom/${nanoid()}`,
   },
   {
     squareId: "okJ92Hbs",
     squareTitle: "Curate Collaborator's List",
     squareBlurb: "Carefully manage your list of collaborators",
     squareHoverPrompt: "Open",
-    squareIcon: <FaClipboardList />,
+    squareIcon: <FaClipboardList size={50} color="orange" />,
   },
   {
     squareId: "ioOdn82bNW8d",
     squareTitle: "Learning Resources",
     squareBlurb: "Suggestions for additional learning resources",
     squareHoverPrompt: "See all",
-    squareIcon: <FaBookMedical />,
+    squareIcon: <FaBookMedical size={50} color="pink" />,
+    squarehref: "/https://www.codecademy.com/articles",
   },
   {
     squareId: "jd7777181",
-    squareTitle: ". . . More",
-    squareBlurb: "Start a new collaborative coding session",
+    squareTitle: "More",
+    squareBlurb: "About this app, the developer, source code, and more.", //link to portfolio
     squareHoverPrompt: "See learning resources",
-    squareIcon: <TfiMoreAlt />,
+    squareIcon: <MdMore size={50} color="yellow" />,
+    squarehref: "#", // link to profile
   },
 ];
