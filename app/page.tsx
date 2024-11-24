@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { currentUser } from "@clerk/nextjs/server";
 import sql from "@/lib/db";
+import RegisterCollabBtn from "./components/forHome/RegisterCollabBtn";
 
 // import { useEffect, useState } from "react";
 
@@ -71,6 +72,8 @@ export default async function Home() {
     [userId]
   );
 
+  console.log("Here is the list of collaborators: ", collabsData);
+
   return (
     <main className=" w-full flex-col bg-slate-900 text-white flex">
       {/* Welcome!
@@ -123,7 +126,7 @@ export default async function Home() {
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle className=" ">
+                        <DialogTitle className=" text-center ">
                           Curate collaborator list
                         </DialogTitle>
                         <DialogDescription className=" text-black text-center ">
@@ -132,6 +135,35 @@ export default async function Home() {
                           sessions
                         </DialogDescription>
                       </DialogHeader>
+                      <section className=" w-full h-[70vh] overflow-auto flex flex-col items-center ">
+                        {collabsData && collabsData.length > 0 ? (
+                          <div>Show them all here!</div>
+                        ) : (
+                          <div className=" h-full flex w-full flex-col text-center justify-center items-center ">
+                            <h2 className=" text-2xl font-semibold  ">
+                              You {"don't"} currently have any collaborators
+                              registered
+                            </h2>
+                            <p>
+                              {" "}
+                              Try adding a collaborator now. Simply save their
+                              email, and {"you'll"} be able to invite easily
+                              when you're ready
+                            </p>
+
+                            {/* inputs */}
+                            <div className=" w-full mt-8">
+                              <label
+                                className=" text-lg lg:text-[14px] "
+                                htmlFor=""
+                              >
+                                Email
+                              </label>
+                              <RegisterCollabBtn />
+                            </div>
+                          </div>
+                        )}
+                      </section>
                     </DialogContent>
                   </Dialog>
                 ) : (
