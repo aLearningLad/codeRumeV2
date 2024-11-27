@@ -64,3 +64,9 @@ declare type Tnewsquares = {
   squareIcon: React.ReactElement;
   squarehref?: string;
 };
+
+declare type Tloggedinnavdata = {
+  linkId: string;
+  linkTitle: string;
+  linkHref: string;
+};

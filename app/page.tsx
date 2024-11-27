@@ -21,6 +21,9 @@ import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
 import DeleteCollabBtn from "./components/forHome/DeleteCollabBtn";
 import { GiTronArrow } from "react-icons/gi";
 import { nanoid } from "nanoid";
+import { TiThMenu } from "react-icons/ti";
+import { FaAnglesRight, FaSquareCaretRight } from "react-icons/fa6";
+import { loggedinnavdata } from "@/miscdata/loggedinnavdata";
 
 // import { useEffect, useState } from "react";
 
@@ -79,15 +82,28 @@ export default async function Home() {
   console.log("Here is the list of collaborators: ", collabsData);
 
   return (
-    <main className=" w-full flex-col bg-slate-900 text-white flex">
+    <main className=" w-full flex-col text-black flex">
       {/* Welcome!
       <button onClick={() => signOut({ redirectUrl: "/" })}>Sign Out</button>
       <button onClick={handleSend}>Send Invite</button> */}
       <div className=" w-full ">
         <nav className=" w-full h-20 border-b-2 border-slate-500/20 ">
-          Modal opener here
+          <Dialog>
+            <DialogTrigger>
+              <div>
+                <TiThMenu size={30} color="black" />
+              </div>
+            </DialogTrigger>
+            <DialogContent className=" w-full h-[70vh] flex flex-col justify-center items-center ">
+              {loggedinnavdata.map(({ linkHref, linkId, linkTitle }) => (
+                <Link key={linkId} href={linkHref}>
+                  {linkTitle}
+                </Link>
+              ))}
+            </DialogContent>
+          </Dialog>
         </nav>
-        <header className=" mb-5 md:mb-7 lg:mb-12">
+        <header className=" mb-5 md:mb-7 lg:mb-12 mt-2 lg:mt-4">
           <h1 className=" text-3xl pb-4 text-center xl:text-start lg:text-[60px] xl:text-[70px] xl:leading-[62px]">
             Collaborative coding <br className=" xl:flex hidden" /> made a
             little easier
@@ -112,7 +128,7 @@ export default async function Home() {
                 squareId === "okJ92Hbs" ? (
                   <Dialog>
                     <DialogTrigger>
-                      <div className=" hover:bg-cyan-500/30 cursor-pointer mt-8 hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 ">
+                      <div className=" text-white hover:bg-cyan-500 cursor-pointer mt-8 hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-950 ">
                         <div className=" group-hover:hidden">{squareIcon}</div>
                         <h3 className=" text-2xl lg:text-lg group-hover:hidden">
                           {squareTitle}
@@ -121,7 +137,7 @@ export default async function Home() {
                           {squareBlurb}
                         </p>
                         <div className=" hidden p-2 items-center justify-center group-hover:flex-col gap-2 group-hover:flex h-[70%] w-full sm:w-10/12 md:w-8/12 rounded-lg text-white ">
-                          <MdOutlineStart size={40} />
+                          <FaSquareCaretRight size={40} />
                           <p className=" text-xl lg:text-lg ">
                             {squareHoverPrompt}
                           </p>
@@ -216,7 +232,9 @@ export default async function Home() {
                     key={squareId}
                     className={` ${
                       squareId === "jd7777181" && "mt-8"
-                    } hover:bg-cyan-500/30 cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 `}
+                    } hover:bg-cyan-500 ${
+                      squareId === "ioOdn82bNW8d" && "bg-slate-950 text-white"
+                    } cursor-pointer hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-500/20 `}
                   >
                     <div className=" group-hover:hidden">{squareIcon}</div>
                     <h3 className=" text-2xl lg:text-lg group-hover:hidden">
@@ -227,7 +245,7 @@ export default async function Home() {
                     </p>
 
                     <div className=" hidden p-2 items-center justify-center group-hover:flex-col gap-2 group-hover:flex h-[70%] w-full sm:w-10/12 md:w-8/12 rounded-lg text-white ">
-                      <MdOutlineStart size={40} />
+                      <FaSquareCaretRight size={60} />
                       <p className=" text-xl lg:text-lg ">
                         {squareHoverPrompt}
                       </p>
@@ -239,7 +257,7 @@ export default async function Home() {
 
           {/* right side with video */}
           <div className=" hidden h-[60vh] lg:flex w-5/12 flex-row ">
-            <video
+            {/* <video
               src="/assets/feedvid1.mp4"
               width={1920}
               height={1080}
@@ -248,13 +266,13 @@ export default async function Home() {
               loop
               muted
               className=" w-fit overflow-clip rounded-xl  "
-            />
+            /> */}
             <div className=" h-full flex flex-col text-start pl-3">
-              <h2 className=" text-2xl">
-                <b>codeRume&copy;</b>
-                as a networking site
+              <h2 className=" text-4xl ">
+                Explore <b className=" text-2xl">codeRume&copy;</b> as a
+                networking site
               </h2>
-              <h3>
+              <h3 className=" mb-3">
                 Explore other facets of programming. Perhaps try centering your
                 codeRume&copy; session chats around topics such as:
               </h3>
@@ -280,77 +298,19 @@ export default async function Home() {
                 </li>
               </ol>
               <p className=" mb-5">
-                {" "}
                 . . . and inumerable other topics to liven up your
                 codeRume&copy; sessions
               </p>
 
               <Link
-                className=" w-8/12 bg-white rounded-md flex justify-center items-center text-black "
+                className=" w-fit px-5 border-b-2 border-slate-950 flex justify-center items-center text-slate-900 gap-2 "
                 href={`/collabroom/${nanoid()}`}
               >
-                Take me there!
+                Take me there <FaAnglesRight size={20} />
               </Link>
             </div>
           </div>
         </section>
-
-        {/* <section className="w-full xl:w-8/12 flex flex-col text-center xl:text-start">
-          <h1 className=" text-3xl pb-4 text-center xl:text-start lg:text-[60px] xl:text-[70px] xl:leading-[62px]">
-            Collaborative learning <br className=" xl:flex hidden" /> made a
-            little easier
-          </h1>
-          <p className=" text-[26px] pb-6 xl:pb-0">
-            For developers, by a developer, bruv
-          </p> */}
-        {/* <section className="xl:h-full w-full px-3 md:px-4 lg:px-5 xl:px-7 flex flex-col xl:flex-row justify-center xl:justify-normal items-center xl:items-end">
-            <div className="w-full xl:w-4/12 h-[70%] xl:h-[60%] relative overflow-clip rounded-xl lg:rounded-2xl">
-              <Image
-                src="/assets/feed1.png"
-                className=" absolute"
-                fill
-                alt="groupwork"
-              />
-            </div>
-            <div className=" w-[1px] xl:flex hidden h-full bg-neutral-300 mx-2" />
-            <div className="w-8/12 h-full flex flex-col justify-start pt-8 xl:pt-0 xl:justify-end items-start">
-              <h1 className="text-xl">Dive in! What do you need help with?</h1>
-              <div className=" w-full h-[60%] grid grid-cols-1 lg:grid-cols-2 gap-2 xl:gap-4 px-2 mt-3">
-                {squares.map((tab) => (
-                  <button
-                    key={tab.id}
-                    className="w-full p-2 hover:scale-90 flex-col group h-full border-[3px] border-neutral-300 hover:bg-cyan-500 transition duration-500 ease-in hover:text-white hover:border-none active:border-none flex justify-center items-center rounded-lg lg:rounded-2xl"
-                  >
-                    <p className="text-xl xl:text-2xl group-hover:hidden text-neutral-600 group-hover:text-white">
-                      {tab.title}
-                    </p>
-                    <p className="text-[12px] hidden xl:group-hover:flex">
-                      {tab.desc}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </section>
-        </section> */}
-        {/* RIGHT SIDE VIDEO   */}
-        {/* <section className="w-full xl:w-4/12 justify-between gap-2 hidden xl:flex flex-col rounded-lg md:rounded-xl lg:rounded-2xl">
-          <div className=" w-full h-[90%] hidden xl:flex flex-col gap-4 overflow-clip rounded-lg md:rounded-xl lg:rounded-2xl">
-            <video
-              src="/assets/feedvid1.mp4"
-              width={1920}
-              height={1080}
-              autoPlay={true}
-              controls={false}
-              loop
-              muted
-            />
-          </div>
-          <button className="h-[10%] w-full text-black flex justify-center items-center rounded-lg md:rounded-xl">
-            <p className=" text-2xl">Explore</p>
-            <div className="h-[1px] w-[80px] bg-neutral-500 " />
-          </button>
-        </section> */}
       </div>
     </main>
   );

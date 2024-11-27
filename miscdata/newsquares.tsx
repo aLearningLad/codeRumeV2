@@ -39,14 +39,14 @@ export const newsquares: Tnewsquares[] = [
     squareTitle: "Learning Resources",
     squareBlurb: "Suggestions for additional learning resources",
     squareHoverPrompt: "See all",
-    squareIcon: <FaBookMedical size={50} color="pink" />,
+    squareIcon: <FaBookMedical size={50} color="green" />,
     squarehref: "/https://www.codecademy.com/articles",
   },
   {
     squareId: "jd7777181",
     squareTitle: "More",
     squareBlurb: "About this app, the developer, source code, and more.", //link to portfolio
-    squareHoverPrompt: "See learning resources",
+    squareHoverPrompt: "See more",
     squareIcon: <MdMore size={50} color="yellow" />,
     squarehref: "#", // link to profile
   },
