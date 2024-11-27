@@ -1,11 +1,5 @@
-// "use client";
-
 import { newsquares } from "@/miscdata/newsquares";
-import { squares } from "@/miscdata/squares";
-import { useClerk, useUser } from "@clerk/nextjs";
-import Image from "next/image";
 import Link from "next/link";
-import { MdOutlineStart } from "react-icons/md";
 import {
   Dialog,
   DialogContent,
@@ -17,15 +11,14 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import sql from "@/lib/db";
 import RegisterCollabBtn from "./components/forHome/RegisterCollabBtn";
-import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
+import { FaUserCheck } from "react-icons/fa";
 import DeleteCollabBtn from "./components/forHome/DeleteCollabBtn";
 import { GiTronArrow } from "react-icons/gi";
 import { nanoid } from "nanoid";
 import { TiThMenu } from "react-icons/ti";
 import { FaAnglesRight, FaSquareCaretRight } from "react-icons/fa6";
 import { loggedinnavdata } from "@/miscdata/loggedinnavdata";
-
-// import { useEffect, useState } from "react";
+import SignOutBtn from "./components/forHome/SignOutBtn";
 
 export default async function Home() {
   // const [emailBody, setEmailBody] = useState<string>(
@@ -84,22 +77,31 @@ export default async function Home() {
   return (
     <main className=" w-full flex-col text-black flex">
       {/* Welcome!
-      <button onClick={() => signOut({ redirectUrl: "/" })}>Sign Out</button>
       <button onClick={handleSend}>Send Invite</button> */}
       <div className=" w-full ">
-        <nav className=" w-full h-20 border-b-2 border-slate-500/20 ">
+        <nav className=" w-full p-4 h-20 border-b-2 border-slate-500/20 ">
           <Dialog>
             <DialogTrigger>
               <div>
                 <TiThMenu size={30} color="black" />
               </div>
             </DialogTrigger>
-            <DialogContent className=" w-full h-[70vh] flex flex-col justify-center items-center ">
+            <DialogContent className=" w-full border-none h-screen bg-slate-500/30 lg:h-[70vh] gap-5 md:gap-3 flex flex-col justify-center items-center ">
+              <DialogTitle className=" mb-5 text-white font-normal text-xl ">
+                Explore
+              </DialogTitle>
+
               {loggedinnavdata.map(({ linkHref, linkId, linkTitle }) => (
-                <Link key={linkId} href={linkHref}>
+                <Link
+                  className=" w-full bg-white hover:scale-95 transition-all duration-300 hover:bg-slate-950 hover:text-white text-slate-950 rounded-sm sm:rounded-md md:rounded-lg h-16 flex justify-center items-center text-2xl md:text-xl lg:text-lg "
+                  key={linkId}
+                  href={linkHref}
+                >
                   {linkTitle}
                 </Link>
               ))}
+
+              <SignOutBtn />
             </DialogContent>
           </Dialog>
         </nav>
