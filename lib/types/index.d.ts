@@ -70,3 +70,20 @@ declare type Tloggedinnavdata = {
   linkTitle: string;
   linkHref: string;
 };
+
+declare type Tdynamicpromoinfo = {
+  title: string;
+  subheading: string;
+  blurb: string;
+  btnText: string;
+  img?: string;
+  objectShown?: number;
+};
+
+declare type Tpromotiles = {
+  id: number;
+  quote: string;
+  author: string;
+  year: number;
+  language: string;
+};

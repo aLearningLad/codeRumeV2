@@ -21,3 +21,14 @@ export interface Message {
 export interface IDeleteCollabBtn {
   unique_id: string;
 }
+
+export interface Istore {
+  promoImage: string | null;
+  selectedTab: string | null;
+  objectShown: number;
+  modalOpen: boolean;
+  setPromoImage: (promoImage: string | null) => void;
+  setSelectedTab: (selectedTab: string | null) => void;
+  setObjectShown: (objectShown: number) => void;
+  setModalOpen: (modalOpen: boolean) => void;
+}
