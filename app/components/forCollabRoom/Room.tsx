@@ -17,7 +17,7 @@ export function Room({ children }: { children: ReactNode }) {
     >
       <ClientSideSuspense
         fallback={
-          <div className=" w-full h-screen flex justify-center items-center bg-slate-900 text-2xl">
+          <div className=" w-full h-screen flex justify-center items-center bg-slate-900 text-2xl text-white">
             Just a second . . . {"We're"} setting everything up
           </div>
         }

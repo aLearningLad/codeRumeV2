@@ -164,7 +164,15 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
   // save highlighted code as text file
   const handleSaveDoc = async () => {
-    alert("File save button clicked!");
+    if (typeof window.getEditorContent === "function") {
+      const editorContent = window.getEditorContent();
+
+      // create my blob and put editor text inside it
+      const blob = new Blob([editorContent], { type: "text/plain" });
+
+      //  give my user a url to download their code
+      const url = window.URL.createObjectURL(blob);
+    }
   };
 
   return (

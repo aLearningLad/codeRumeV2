@@ -9,8 +9,6 @@ import { useCallback, useEffect, useState } from "react";
 import { LiveblocksYjsProvider } from "@liveblocks/yjs";
 import { useRoom, useSelf } from "@liveblocks/react/suspense";
 import styles from "./Editor.module.css";
-// import { Avatars } from "@/components/Avatars";
-// import { Toolbar } from "@/components/Toolbar";
 
 // Collaborative code editor with undo/redo, live cursors, and live avatars
 export function Editor() {
@@ -65,6 +63,10 @@ export function Editor() {
       state,
       parent: element,
     });
+
+    // get the code text from Y.text
+    const getEditorContent = () => ytext.toString();
+    window.getEditorContent = getEditorContent; // attach it to global scope just to test
 
     return () => {
       ydoc?.destroy();
