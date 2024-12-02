@@ -22,8 +22,8 @@ const Unique = () => {
 
       <UniqueCard
         btnText="Learn more"
-        heading="Collaborative learning & sharing"
-        blurb="Connect with others to learn, teach and share your knowledge. Leverage the power of community within education, allowing you and others to fast-track your skillsets beyond just coding."
+        heading="Collaborative work & learning"
+        blurb="Connect with others to build, learn, and share your knowledge. Leverage the power of community within workspaces, allowing you and others to fast-track your skillsets beyond just coding."
         imgLink="/assets/teams.png"
       />
 
@@ -32,7 +32,7 @@ const Unique = () => {
       {/* CARD 2  */}
 
       <UniqueCard
-        heading="AI-Powered tutoring"
+        heading="AI-Powered tutoring - Coming soon"
         blurb="Make use of artificial intelligence to seek out and fix bugs, explain code, or give suggestions on how you might improve existing snippets."
         btnText="More on code Rume AI"
         imgLink="/assets/ai.png"
