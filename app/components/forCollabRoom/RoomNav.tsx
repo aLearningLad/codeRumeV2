@@ -160,6 +160,32 @@ const RoomNav = () => {
                 </select>
               </div>
 
+              {/* dialog with list of collaborators ---> edit this so it calls data from Redis */}
+              <div className=" w-full my-5 flex flex-col h-fit py-2 px-3 text-center gap-1 ">
+                {/* expected members count  */}
+                <label htmlFor="">Who are you inviting?</label>
+                <Dialog>
+                  <DialogTrigger className=" h-12 focus:scale-95 transition-all duration-300 px-3 bg-slate-950 text-white text-[14px] rounded-sm ">
+                    Open Collaborators List
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className=" text-center ">
+                        Are you absolutely sure?
+                      </DialogTitle>
+                      <DialogDescription className=" text-center text-black ">
+                        Choose from a list of people {"you've"} coded alongside
+                        in the past
+                      </DialogDescription>
+                    </DialogHeader>
+                    <section className=" h-[80vh] lg:h-[75vh] bg-slate-500/30 ">
+                      collabs shown here. If none, say that and allow
+                      registration of collab
+                    </section>
+                  </DialogContent>
+                </Dialog>
+              </div>
+
               <button
                 className=" min-h-20 mb-12 rounded-md bg-slate-950 text-white text-lg flex justify-center items-center w-full"
                 onClick={handleInvite}
