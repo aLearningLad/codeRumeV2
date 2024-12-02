@@ -64,7 +64,10 @@ const ProfileNav = () => {
                   featureLikelihood,
                   featureTitle,
                 }) => (
-                  <div className=" w-full flex flex-col lg:min-h-26 max-h-fit text-center mb-10 lg:mb-16">
+                  <div
+                    key={featureId}
+                    className=" w-full flex flex-col lg:min-h-26 max-h-fit text-center mb-10 lg:mb-16"
+                  >
                     <h1 className=" text-2xl lg:text-lg font-semibold">
                       {featureTitle}
                     </h1>

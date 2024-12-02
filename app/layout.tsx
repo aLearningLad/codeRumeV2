@@ -41,14 +41,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <link
+          rel="icon"
+          sizes="<generated>"
+          type="image<generated>"
+          href="/assets/crlogo.png"
+        />
         <body className={baskerville.className}>
           <Toaster />
-          <link
-            rel="icon"
-            sizes="<generated>"
-            type="image<generated>"
-            href="/assets/crlogo.png"
-          />
           <SignedOut>
             <main className=" w-full min-h-screen relative items-center bg-white flex flex-col ">
               <Navbar />
@@ -58,7 +58,7 @@ export default function RootLayout({
           </SignedOut>
           <ClerkProvider dynamic>
             <SignedIn>
-              <main className=" w-full min-h-screen p-2 md:p-3 lg:p-5">
+              <main className=" w-full min-h-screen">
                 <Providers>{children}</Providers>
               </main>
             </SignedIn>

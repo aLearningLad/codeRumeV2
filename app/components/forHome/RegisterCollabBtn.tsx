@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const RegisterCollabBtn = () => {
   const [email, setEmail] = useState<string>();
@@ -36,7 +37,14 @@ const RegisterCollabBtn = () => {
           email,
         }),
       });
-      router.refresh();
+      if (collabSaveResults.status === 200) {
+        toast.success(`${email} saved as a collaborator!`);
+        router.refresh();
+      } else {
+        toast.error(
+          `Unable to save ${email} to collaborator list. Please try again`
+        );
+      }
     } catch (error) {
       console.log("Error while saving collaborator to db: ", error);
     }

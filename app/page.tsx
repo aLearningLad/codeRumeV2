@@ -128,7 +128,7 @@ export default async function Home() {
                 squarehref,
               }) =>
                 squareId === "okJ92Hbs" ? (
-                  <Dialog>
+                  <Dialog key={squareId}>
                     <DialogTrigger>
                       <div className=" text-white hover:bg-cyan-500 cursor-pointer mt-8 hover:scale-90 transition-all duration-300 ease-in-out w-full text-center p-3 flex flex-col justify-center items-center group h-40 lg:min-h-60 rounded-md sm:rounded-lg lg:rounded-2xl xl:rounded-3xl bg-slate-950 ">
                         <div className=" group-hover:hidden">{squareIcon}</div>

@@ -10,13 +10,20 @@ import { IoMdMailUnread } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaLayerGroup } from "react-icons/fa6";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNumber";
 
 const ProfilePage = async () => {
   //   // get user from clerk
   const user = await currentUser();
   const userImg = user?.imageUrl;
-
-  // console.log("This is the user object from clerk: ", user);
 
   // check that user is not in db
   const result = await sql(`SELECT * FROM all_users WHERE user_id = $1`, [
@@ -46,12 +53,12 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className=" min-h-screen w-full flex bg-slate-900 text-white gap-3 p-5 ">
+    <div className=" h-screen w-full flex bg-slate-900 text-white gap-3 p-5 ">
       {/* left side  */}
       <div className=" lg:flex hidden px-2 md:px-5 py-5 items-center justify-start relative flex-col lg:w-2/12 bg-slate-500/10 rounded-lg ">
         <section className=" w-full flex flex-col text-start mb-12 border-b-2 pb-2 border-slate-500/40 ">
-          <h1 className=" text-2xl font-semibold">Account</h1>
-          <h3 className=" text-[14px] text-neutral-300">
+          <h1 className=" text-2xl font-semibold ">Account</h1>
+          <h3 className=" text-[14px] text-neutral-300 ">
             Manage your account info
           </h3>
         </section>
@@ -117,13 +124,32 @@ const ProfilePage = async () => {
                 <div className=" w-[4px] h-[4px] rounded-full bg-green-400 " />
               </span>
             ))}
-            <button className="flex w-full h-20 lg:h-10 sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 bg-slate-500/20 rounded-md ">
-              <FaPlus
-                size={12}
-                className=" text-white group-hover:text-black "
-              />
-              <p className=" text-[12px] ">Add an email address</p>
-            </button>
+
+            {/* dialog to add more emails */}
+            <Dialog>
+              <DialogTrigger>
+                <div className="flex w-full h-20 lg:h-10 sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 bg-slate-500/20 rounded-md ">
+                  <FaPlus
+                    size={12}
+                    className=" text-white group-hover:text-black "
+                  />
+                  <p className=" text-[12px] ">Add backup email address</p>
+                </div>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className=" text-center">
+                    Premium Feature
+                  </DialogTitle>
+                  <DialogDescription className=" text-center text-black ">
+                    This action is currently reserved for a selected group of
+                    users running the beta program. After launch, premium
+                    features will be available to the general public for
+                    subscription.
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </section>
 
@@ -143,17 +169,7 @@ const ProfilePage = async () => {
                 </div>
               ))
             ) : (
-              <div className=" w-full flex flex-col gap-2 items-start">
-                You don't currently have any phone numbers <br /> attached to
-                this account
-                <button className="flex hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 h-20 lg:h-10 bg-slate-500/20 rounded-md ">
-                  <FaPlus
-                    size={12}
-                    className=" text-white group-hover:text-black "
-                  />
-                  <p className=" text-[12px] ">Add a phone number</p>
-                </button>
-              </div>
+              <ProfileNewPhoneNumber />
             )}
           </div>
         </section>

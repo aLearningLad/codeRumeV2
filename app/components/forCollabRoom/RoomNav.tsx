@@ -193,10 +193,6 @@ const RoomNav: React.FC<Iroomnav> = ({ collaboratorList }) => {
                         </div>
                       ) : (
                         <div className=" w-full h-full flex flex-col p-2 text-center">
-                          <h1 className=" text-xl lg:text-lg ">
-                            You don't have any collaborators saved.
-                          </h1>
-                          <h3>Add some below</h3>
                           <section className=" w-full h-[70vh] overflow-auto flex flex-col items-center ">
                             {collaboratorList && collaboratorList.length > 0 ? (
                               <div className=" w-full h-full flex-col flex ">
