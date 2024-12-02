@@ -32,3 +32,7 @@ export interface Istore {
   setObjectShown: (objectShown: number) => void;
   setModalOpen: (modalOpen: boolean) => void;
 }
+
+export interface Iroomnav {
+  collaboratorList: Tcollaborator[];
+}

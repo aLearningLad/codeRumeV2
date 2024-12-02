@@ -15,8 +15,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { useClerk, useUser } from "@clerk/nextjs";
+import { Iroomnav } from "@/lib/interfaces";
+import RegisterCollabBtn from "../forHome/RegisterCollabBtn";
+import { FaUserCheck } from "react-icons/fa";
+import DeleteCollabBtn from "../forHome/DeleteCollabBtn";
 
-const RoomNav = () => {
+const RoomNav: React.FC<Iroomnav> = ({ collaboratorList }) => {
   const [isEndModalOpen, setIsEndModalOpen] = useState<boolean>(false);
   const user = useUser().user;
 
@@ -171,16 +175,100 @@ const RoomNav = () => {
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle className=" text-center ">
-                        Are you absolutely sure?
+                        Invite others to your codeRume
                       </DialogTitle>
                       <DialogDescription className=" text-center text-black ">
                         Choose from a list of people {"you've"} coded alongside
                         in the past
                       </DialogDescription>
                     </DialogHeader>
-                    <section className=" h-[80vh] lg:h-[75vh] bg-slate-500/30 ">
-                      collabs shown here. If none, say that and allow
-                      registration of collab
+                    <section className=" h-[80vh] lg:h-[75vh] bg-slate-500/10 p-3 rounded-lg ">
+                      {collaboratorList.length > 0 ? (
+                        <div>
+                          {collaboratorList.map((person) => (
+                            <div className=" bg-slate-950 rounded-md h-16 text-white ">
+                              {person.email}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className=" w-full h-full flex flex-col p-2 text-center">
+                          <h1 className=" text-xl lg:text-lg ">
+                            You don't have any collaborators saved.
+                          </h1>
+                          <h3>Add some below</h3>
+                          <section className=" w-full h-[70vh] overflow-auto flex flex-col items-center ">
+                            {collaboratorList && collaboratorList.length > 0 ? (
+                              <div className=" w-full h-full flex-col flex ">
+                                <div className=" w-full h-[60%] bg-neutral-400/30 rounded-lg flex flex-col p-2 ">
+                                  <h3 className=" text-center mb-2">
+                                    Your current collaborators list
+                                  </h3>
+                                  <div className=" w-full h-full p-2 gap-5 sm:gap-4 md:gap-3 flex flex-col overflow-auto bg-slate-950 rounded-lg text-white">
+                                    {collaboratorList.map((person: any) => (
+                                      <div
+                                        className=" min-h-12 flex bg-slate-500/50 rounded-md py-1 px-3"
+                                        key={person.unique_id}
+                                      >
+                                        <div className=" flex items-center h-full">
+                                          <FaUserCheck size={20} />
+                                        </div>
+                                        <p className=" w-full h-full flex justify-center items-center">
+                                          {person.email}
+                                        </p>
+                                        <DeleteCollabBtn
+                                          key={person.unique_id}
+                                          unique_id={person.unique_id}
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                                <h3 className=" text-black text-center mt-3 ">
+                                  You can easily register even more
+                                  collaborators
+                                </h3>
+                                <div>
+                                  {/* inputs  */}
+                                  <div className=" w-full h-[40%]">
+                                    <label
+                                      className=" text-lg lg:text-[14px] "
+                                      htmlFor=""
+                                    >
+                                      Email
+                                    </label>
+                                    <RegisterCollabBtn />
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className=" h-full flex w-full flex-col text-center justify-center items-center ">
+                                <h2 className=" text-2xl font-semibold  ">
+                                  You {"don't"} currently have any collaborators
+                                  registered
+                                </h2>
+                                <p>
+                                  {" "}
+                                  Try adding a collaborator now. Simply save
+                                  their email, and {"you'll"} be able to invite
+                                  easily when you're ready
+                                </p>
+
+                                {/* inputs */}
+                                <div className=" w-full mt-8">
+                                  <label
+                                    className=" text-lg lg:text-[14px] "
+                                    htmlFor=""
+                                  >
+                                    Email
+                                  </label>
+                                  <RegisterCollabBtn />
+                                </div>
+                              </div>
+                            )}
+                          </section>
+                        </div>
+                      )}
                     </section>
                   </DialogContent>
                 </Dialog>

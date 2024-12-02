@@ -224,49 +224,69 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
           <section className="w-full sm:w-[95%] md:w-[90%] lg:w-4/12 min-h-[25vh] lg:h-full p-2 gap-2 md:gap-3 lg:gap-5 flex flex-col">
             {/* chat section */}
-            <div className=" w-full min-h-[40vh] lg:h-[60vh] flex flex-col bg-slate-500/70 p-3 rounded-2xl gap-8 overflow-auto ">
+            <div className=" w-full text-center items-center min-h-[40vh] lg:h-[60vh] flex flex-col bg-slate-500/70 p-3 rounded-2xl gap-8 overflow-auto ">
+              <h1 className=" bg-white w-fit px-6 py-2 rounded-lg text-lg text-black">
+                codeRume chat
+              </h1>
               {/* where messages appear */}
-              {messages.map((eachText: Message) => (
-                <div
-                  className={` w-full py-1 px-3 rounded-lg text-white ${
-                    eachText.current_user_id === userId
-                      ? " w-full min-h-28 max-h-60 text-ellipsis flex flex-col items-start justify-center "
-                      : "w-full min-h-24 max-h-60  text-ellipsis flex flex-col items-end justify-center"
-                  } `}
-                >
-                  <section
-                    className={` ${
-                      eachText.current_user_id === userId
-                        ? " items-start h-full min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 bg-slate-500/60 "
-                        : "items-end bg-pink-500/30 min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 "
-                    } w-full h-full flex flex-col `}
-                  >
-                    <p className="h-[75%] overflow-auto ">{eachText.message}</p>
-                    <span className=" flex gap-1 items-end min-w-[40%] ">
-                      <div className="">
-                        {eachText.current_user_id === userId ? (
-                          <FaCrown className=" text-yellow-500" size={20} />
-                        ) : (
-                          <IoPersonSharp
-                            className="  text-cyan-400"
-                            size={20}
-                          />
-                        )}
-                      </div>
-                      <p className=" text-[8px]">by</p>
-                      <p>
-                        {eachText.current_user_id === userId ? (
-                          <p className=" text-[12px]">You</p>
-                        ) : (
-                          <p className="text-[12px]">{eachText.username}</p>
-                        )}
-                      </p>
-                      <p className="text-[8px]">@</p>
-                      <p className="text-[10px]">{eachText.sentAt}</p>
-                    </span>
-                  </section>
+              {messages.length > 0 ? (
+                <>
+                  {messages.map((eachText: Message) => (
+                    <div
+                      className={` w-full py-1 px-3 rounded-lg text-white ${
+                        eachText.current_user_id === userId
+                          ? " w-full min-h-28 max-h-60 text-ellipsis flex flex-col items-start justify-center "
+                          : "w-full min-h-24 max-h-60  text-ellipsis flex flex-col items-end justify-center"
+                      } `}
+                    >
+                      <section
+                        className={` ${
+                          eachText.current_user_id === userId
+                            ? " items-start h-full min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 bg-slate-500/60 "
+                            : "items-end bg-pink-500/30 min-w-[60%] max-w-[85%] rounded-lg p-2 lg:p-3 "
+                        } w-full h-full flex flex-col `}
+                      >
+                        <p className="h-[75%] overflow-auto ">
+                          {eachText.message}
+                        </p>
+                        <span className=" flex gap-1 items-end min-w-[40%] ">
+                          <div className="">
+                            {eachText.current_user_id === userId ? (
+                              <FaCrown className=" text-yellow-500" size={20} />
+                            ) : (
+                              <IoPersonSharp
+                                className="  text-cyan-400"
+                                size={20}
+                              />
+                            )}
+                          </div>
+                          <p className=" text-[8px]">by</p>
+                          <p>
+                            {eachText.current_user_id === userId ? (
+                              <p className=" text-[12px]">You</p>
+                            ) : (
+                              <p className="text-[12px]">{eachText.username}</p>
+                            )}
+                          </p>
+                          <p className="text-[8px]">@</p>
+                          <p className="text-[10px]">{eachText.sentAt}</p>
+                        </span>
+                      </section>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div className=" w-full p-3 h-full flex flex-col justify-center items-center text-white text-center ">
+                  <h2 className=" text-2xl ">
+                    Hmm . . . the chat is empty right now
+                  </h2>
+
+                  <h4 className=" text-[14px] ">
+                    Maybe try inviting friends from your collaborator list, or
+                    share a thought
+                  </h4>
                 </div>
-              ))}
+              )}
             </div>
 
             <div className=" w-full min-h-[10vh] bg-slate-500/50 rounded-lg py-2 px-2 lg:px-3 flex items-center justify-center gap-2 ">
@@ -294,7 +314,7 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
             </div>
           </section>
         </section>
-        <RoomNav />
+        <RoomNav collaboratorList={collaboratorList} />
       </div>
     </Room>
   );
