@@ -172,6 +172,21 @@ const CollabRoom: React.FC<chatProps> = ({ params }) => {
 
       //  give my user a url to download their code
       const url = window.URL.createObjectURL(blob);
+
+      // start the download
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "coderume-session-code.txt";
+      document.body.appendChild(a);
+      a.click();
+
+      //clean up
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } else {
+      console.error(
+        "Editor content retrieval function is not defined. Please contact the developer"
+      );
     }
   };
 
