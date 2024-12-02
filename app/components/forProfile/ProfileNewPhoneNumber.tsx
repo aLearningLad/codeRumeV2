@@ -5,12 +5,14 @@ import { FaPlus } from "react-icons/fa";
 import { IoCloudDone } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { Iprofilenewphonenumber } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 
 const ProfileNewPhoneNumber: React.FC<Iprofilenewphonenumber> = ({
   userId,
 }) => {
   const [isInputShown, setIsInputShown] = useState<boolean>(false);
   const [phoneNumber, setPhoneNumber] = useState<string>();
+  const router = useRouter();
 
   const handleSaveNumber = async () => {
     try {
@@ -21,6 +23,8 @@ const ProfileNewPhoneNumber: React.FC<Iprofilenewphonenumber> = ({
         },
         body: JSON.stringify({ phoneNumber, userId }),
       });
+
+      router.refresh();
     } catch (error) {
       console.log("Error saving new number: ", error);
     }

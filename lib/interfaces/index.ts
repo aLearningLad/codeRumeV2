@@ -40,3 +40,7 @@ export interface Iroomnav {
 export interface Iprofilenewphonenumber {
   userId: string;
 }
+
+export interface Ideletenumberbtn {
+  userId: string;
+}

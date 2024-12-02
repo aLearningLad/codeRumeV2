@@ -5,7 +5,7 @@ import client from "@/lib/db";
 import { UserProfile } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTrashAlt } from "react-icons/fa";
 import { IoMdMailUnread } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNumber";
+import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
 
 const ProfilePage = async () => {
   try {
@@ -161,14 +162,23 @@ const ProfilePage = async () => {
               </div>
             </div>
             <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
-              {user?.phoneNumbers && user?.phoneNumbers.length > 0 ? (
-                user?.phoneNumbers.map((eachNumber) => (
-                  <div key={eachNumber.id} className="">
-                    {eachNumber.phoneNumber}
-                  </div>
-                ))
+              {result && result[0].phone_number ? (
+                <div className=" h-10 flex gap-2 items-center">
+                  <span>{result[0].phone_number}</span>
+                  <DeleteNumberBtn userId={user?.id as string} />
+                </div>
               ) : (
-                <ProfileNewPhoneNumber userId={user?.id as string} />
+                <>
+                  {user?.phoneNumbers && user?.phoneNumbers.length > 0 ? (
+                    user?.phoneNumbers.map((eachNumber) => (
+                      <div key={eachNumber.id} className="">
+                        {eachNumber.phoneNumber}
+                      </div>
+                    ))
+                  ) : (
+                    <ProfileNewPhoneNumber userId={user?.id as string} />
+                  )}
+                </>
               )}
             </div>
           </section>
