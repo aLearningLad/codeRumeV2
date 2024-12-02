@@ -168,7 +168,7 @@ const ProfilePage = async () => {
                   </div>
                 ))
               ) : (
-                <ProfileNewPhoneNumber />
+                <ProfileNewPhoneNumber userId={user?.id as string} />
               )}
             </div>
           </section>

@@ -36,3 +36,7 @@ export interface Istore {
 export interface Iroomnav {
   collaboratorList: Tcollaborator[];
 }
+
+export interface Iprofilenewphonenumber {
+  userId: string;
+}

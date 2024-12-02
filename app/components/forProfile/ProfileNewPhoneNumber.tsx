@@ -4,8 +4,11 @@ import { ChangeEvent, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoCloudDone } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
+import { Iprofilenewphonenumber } from "@/lib/interfaces";
 
-const ProfileNewPhoneNumber = () => {
+const ProfileNewPhoneNumber: React.FC<Iprofilenewphonenumber> = ({
+  userId,
+}) => {
   const [isInputShown, setIsInputShown] = useState<boolean>(false);
   const [phoneNumber, setPhoneNumber] = useState<string>();
 
@@ -16,7 +19,7 @@ const ProfileNewPhoneNumber = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ phoneNumber }),
+        body: JSON.stringify({ phoneNumber, userId }),
       });
     } catch (error) {
       console.log("Error saving new number: ", error);
