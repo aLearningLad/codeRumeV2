@@ -23,6 +23,7 @@ import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
 import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
 import ProfileCollabBtn from "@/app/components/forProfile/ProfileCollabBtn";
 import CollabAdd from "@/app/components/forProfile/CollabAdd";
+import ProfileSignOut from "@/app/components/forProfile/ProfileSignOut";
 
 const ProfilePage = async () => {
   try {
@@ -75,9 +76,7 @@ const ProfilePage = async () => {
 
           <ProfileNav />
 
-          <button className=" w-[90%] absolute hover:scale-95 transition-all rounded-md bottom-3 ease-in-out flex h-12 text-[14px] justify-center items-center bg-white text-slate-950 ">
-            Sign Out
-          </button>
+          <ProfileSignOut />
         </div>
 
         {/* right side  */}
@@ -196,11 +195,11 @@ const ProfilePage = async () => {
             </div>
 
             <div className=" w-full h-full lg:w-9/12 flex gap-3 items-center justify-start">
-              <span className=" h-full w-full sm:w-[95%] md:w-[90%] lg:w-[85%] ">
+              <span className=" h-full w-full sm:w-[95%] md:w-[90%] lg:w-[85%] bg-slate-500/30 p-2 rounded-md md:rounded-lg">
                 {collabsList && collabsList.length > 0 ? (
-                  <div className=" w-full h-full flex overflow-auto gap-4 bg-slate-500/30 p-2 rounded-md md:rounded-lg items-center">
+                  <div className=" w-full h-full flex overflow-auto gap-4 p-2 items-center">
                     {collabsList.map((card) => (
-                      <div className=" w-fit h-full lg:h-[80%] px-3 flex items-center bg-white rounded-md text-black ">
+                      <div className=" w-fit h-full lg:h-[80%] px-3 flex items-center bg-slate-500 text-white rounded-md ">
                         {card.email}
                       </div>
                     ))}
@@ -229,12 +228,6 @@ const ProfilePage = async () => {
       </div>
     );
   }
-
-  // return (
-  //   <div className=" w-full h-screen bg-slate-950 flex justify-center items-center ">
-  //     <UserProfile />
-  //   </div>
-  // );
 };
 
 export default ProfilePage;
