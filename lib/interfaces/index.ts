@@ -44,3 +44,8 @@ export interface Iprofilenewphonenumber {
 export interface Ideletenumberbtn {
   userId: string;
 }
+
+export interface Iprofilecollabbtn {
+  userId: string;
+  email?: string;
+}

@@ -22,6 +22,7 @@ import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNu
 import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
 import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
 import ProfileCollabBtn from "@/app/components/forProfile/ProfileCollabBtn";
+import CollabAdd from "@/app/components/forProfile/CollabAdd";
 
 const ProfilePage = async () => {
   try {
@@ -213,14 +214,7 @@ const ProfilePage = async () => {
               <label htmlFor="" className=" text-lg lg:text-[14px] ">
                 Register a collaborator
               </label>
-              <div className=" flex gap-1 ">
-                <input
-                  className=" w-full focus:scale-95 transition-all duration-300 ease-in-out text-lg lg:text-[14px] placeholder:text-[12px] sm:w-10/12 md:w-10/12 lg:w-8/12 h-20 lg:h-12 py-1 rounded-sm outline-none px-2 bg-slate-500/20"
-                  type="text"
-                  placeholder="Eg. thatCoder@gmail.com"
-                />
-                <ProfileCollabBtn />
-              </div>
+              <CollabAdd userId={user?.id as string} />
             </div>
           </section>
         </div>
