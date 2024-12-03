@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNumber";
 import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
+import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
 
 const ProfilePage = async () => {
   try {
@@ -31,6 +32,13 @@ const ProfilePage = async () => {
     const result = await sql(`SELECT * FROM all_users WHERE user_id = $1`, [
       user?.id,
     ]);
+
+    const collabsList = await sql(
+      `SELECT * FROM all_collaborators WHERE friend_id = $1`,
+      [user?.id]
+    );
+
+    console.log("This is the collabs list: ", collabsList);
 
     if (result.length < 1) {
       return (
@@ -91,13 +99,7 @@ const ProfilePage = async () => {
               <p className=" text-xl lg:text-[14px] ">{user?.fullName}</p>
             </div>
             <div className=" w-full lg:w-4/12 h-full flex justify-start items-center text-[14px]">
-              <button className=" h-20 lg:h-10 w-full sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 px-12 bg-slate-500/20 group hover:bg-white hover:text-black transition-all duration-300 ease-in-out rounded-md flex justify-center items-center gap-1 ">
-                <IoSettingsSharp
-                  size={20}
-                  className=" text-white group-hover:text-black "
-                />
-                Edit Profile
-              </button>
+              <EditProfileBtn />
             </div>
           </section>
 
@@ -144,8 +146,9 @@ const ProfilePage = async () => {
                     <DialogDescription className=" text-center text-black ">
                       This action is currently reserved for a selected group of
                       users running the beta program. After launch, premium
-                      features will be available to the general public for
-                      subscription.
+                      features such as LLM-based tutoring, multiple accounts,
+                      and profile changes will be available to the general
+                      public for subscription.
                     </DialogDescription>
                   </DialogHeader>
                 </DialogContent>
@@ -163,7 +166,7 @@ const ProfilePage = async () => {
             </div>
             <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
               {result && result[0].phone_number ? (
-                <div className=" h-10 flex gap-2 items-center">
+                <div className=" flex h-12 gap-2 group items-center border-[3px] border-slate-500/10 rounded-md px-4 py-1">
                   <span>{result[0].phone_number}</span>
                   <DeleteNumberBtn userId={user?.id as string} />
                 </div>
@@ -190,8 +193,20 @@ const ProfilePage = async () => {
               <FaLayerGroup />
             </div>
 
-            <div className=" w-full lg:w-9/12 flex gap-3 items-center justify-start">
-              <span>collaborators shown here</span>
+            <div className=" w-full h-full lg:w-9/12 flex gap-3 items-center justify-start">
+              <span className=" h-full w-full sm:w-[95%] md:w-[90%] lg:w-[85%] ">
+                {collabsList && collabsList.length > 0 ? (
+                  <div className=" w-full h-full flex overflow-auto gap-4 bg-slate-500/30 p-2 rounded-md md:rounded-lg">
+                    {collabsList.map((card) => (
+                      <div className=" w-fit h-full px-3 flex items-center bg-white rounded-md text-black ">
+                        {card.email}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>You don't currently have any collabs</div>
+                )}
+              </span>
             </div>
             <div className=" w-full md:w-8/12 lg:w-1/2 ">
               <label htmlFor="" className=" text-lg lg:text-[14px] ">

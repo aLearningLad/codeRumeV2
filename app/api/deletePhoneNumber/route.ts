@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await sql(`UPDATE all_users set phone_number = NULL WHERE user_id = $2`, [
+    await sql(`UPDATE all_users SET phone_number = NULL WHERE user_id = $1`, [
       userId,
     ]);
 

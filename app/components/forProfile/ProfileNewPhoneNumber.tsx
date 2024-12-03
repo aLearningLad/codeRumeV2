@@ -6,6 +6,7 @@ import { IoCloudDone } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { Iprofilenewphonenumber } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ProfileNewPhoneNumber: React.FC<Iprofilenewphonenumber> = ({
   userId,
@@ -23,9 +24,10 @@ const ProfileNewPhoneNumber: React.FC<Iprofilenewphonenumber> = ({
         },
         body: JSON.stringify({ phoneNumber, userId }),
       });
-
+      toast.success("Phone number added");
       router.refresh();
     } catch (error) {
+      toast.error("Something went wrong. Please try again");
       console.log("Error saving new number: ", error);
     }
   };
