@@ -21,7 +21,7 @@ import {
 import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNumber";
 import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
 import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
-import RegisterCollabBtn from "@/app/components/forHome/RegisterCollabBtn";
+import ProfileCollabBtn from "@/app/components/forProfile/ProfileCollabBtn";
 
 const ProfilePage = async () => {
   try {
@@ -40,14 +40,6 @@ const ProfilePage = async () => {
     );
 
     console.log("This is the collabs list: ", collabsList);
-
-    if (!result) {
-      return (
-        <div className=" w-full h-screen flex justify-center items-center text-center text-2xl text-black ">
-          Something went wrong
-        </div>
-      );
-    }
 
     if (result.length < 1) {
       return (
@@ -207,7 +199,7 @@ const ProfilePage = async () => {
                 {collabsList && collabsList.length > 0 ? (
                   <div className=" w-full h-full flex overflow-auto gap-4 bg-slate-500/30 p-2 rounded-md md:rounded-lg items-center">
                     {collabsList.map((card) => (
-                      <div className=" w-fit h-full lg:h-[40%] px-3 flex items-center bg-white rounded-md text-black ">
+                      <div className=" w-fit h-full lg:h-[80%] px-3 flex items-center bg-white rounded-md text-black ">
                         {card.email}
                       </div>
                     ))}
@@ -222,7 +214,12 @@ const ProfilePage = async () => {
                 Register a collaborator
               </label>
               <div className=" flex gap-1 ">
-                <RegisterCollabBtn />
+                <input
+                  className=" w-full focus:scale-95 transition-all duration-300 ease-in-out text-lg lg:text-[14px] placeholder:text-[12px] sm:w-10/12 md:w-10/12 lg:w-8/12 h-20 lg:h-12 py-1 rounded-sm outline-none px-2 bg-slate-500/20"
+                  type="text"
+                  placeholder="Eg. thatCoder@gmail.com"
+                />
+                <ProfileCollabBtn />
               </div>
             </div>
           </section>
