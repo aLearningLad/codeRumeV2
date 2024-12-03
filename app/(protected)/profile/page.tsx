@@ -21,6 +21,7 @@ import {
 import ProfileNewPhoneNumber from "@/app/components/forProfile/ProfileNewPhoneNumber";
 import DeleteNumberBtn from "@/app/components/forProfile/DeleteNumberBtn";
 import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
+import RegisterCollabBtn from "@/app/components/forHome/RegisterCollabBtn";
 
 const ProfilePage = async () => {
   try {
@@ -39,6 +40,14 @@ const ProfilePage = async () => {
     );
 
     console.log("This is the collabs list: ", collabsList);
+
+    if (!result) {
+      return (
+        <div className=" w-full h-screen flex justify-center items-center text-center text-2xl text-black ">
+          Something went wrong
+        </div>
+      );
+    }
 
     if (result.length < 1) {
       return (
@@ -196,9 +205,9 @@ const ProfilePage = async () => {
             <div className=" w-full h-full lg:w-9/12 flex gap-3 items-center justify-start">
               <span className=" h-full w-full sm:w-[95%] md:w-[90%] lg:w-[85%] ">
                 {collabsList && collabsList.length > 0 ? (
-                  <div className=" w-full h-full flex overflow-auto gap-4 bg-slate-500/30 p-2 rounded-md md:rounded-lg">
+                  <div className=" w-full h-full flex overflow-auto gap-4 bg-slate-500/30 p-2 rounded-md md:rounded-lg items-center">
                     {collabsList.map((card) => (
-                      <div className=" w-fit h-full px-3 flex items-center bg-white rounded-md text-black ">
+                      <div className=" w-fit h-full lg:h-[40%] px-3 flex items-center bg-white rounded-md text-black ">
                         {card.email}
                       </div>
                     ))}
@@ -213,14 +222,7 @@ const ProfilePage = async () => {
                 Register a collaborator
               </label>
               <div className=" flex gap-1 ">
-                <input
-                  className=" w-full focus:scale-95 transition-all duration-300 ease-in-out text-lg lg:text-[14px] placeholder:text-[12px] sm:w-10/12 md:w-10/12 lg:w-8/12 h-20 lg:h-12 py-1 rounded-sm outline-none px-2 bg-slate-500/20"
-                  type="text"
-                  placeholder="Eg. thatCoder@gmail.com"
-                />
-                <button className=" w-fit h-fit p-3 bg-white rounded-sm text-black">
-                  <FaPlus size={14} />
-                </button>
+                <RegisterCollabBtn />
               </div>
             </div>
           </section>
