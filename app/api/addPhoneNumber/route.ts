@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       message: "Phone number saved successfully!",
-      status: 200,
+      status: 201,
     });
   } catch (error) {
     console.log("Error updating phone number: ", error);
