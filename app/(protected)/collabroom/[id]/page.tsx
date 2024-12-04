@@ -15,7 +15,7 @@ import { FaCrown, FaQuestion } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaCopy } from "react-icons/fa";
 
-const CollabRoom: React.FC<chatProps> = ({ params }) => {
+const CollabRoom: React.FC<chatProps | any> = ({ params }) => {
   const user = useUser().user;
   const userId = useAuth().userId;
   const userEmail = useUser().user?.emailAddresses[0].emailAddress;

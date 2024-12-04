@@ -106,7 +106,8 @@ const ProfileNav = () => {
           <section className=" w-full flex items-center justify-normal gap-5 ">
             <Link
               className=" w-full hover:scale-105 transition-all duration-300 ease-in-out h-44 rounded-lg bg-slate-950 text-white flex flex-col gap-3 justify-center items-center"
-              href={"#"}
+              href={"https://github.com/aLearningLad/codeRumeV2"}
+              target="_blank"
             >
               <ImGithub size={60} className=" text-white" />
               <p className=" text-[12px] text-white font-light">

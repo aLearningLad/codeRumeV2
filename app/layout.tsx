@@ -2,15 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./lib/Providers";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import VisitorLanding from "./components/forVisitors/VisitorLanding";
-import { Inter, Baskervville } from "next/font/google";
+import { Baskervville } from "next/font/google";
 import Navbar from "./components/forVisitorLayout/Navbar";
 import Footer from "./components/forVisitorLayout/Footer";
 import { Toaster } from "react-hot-toast";

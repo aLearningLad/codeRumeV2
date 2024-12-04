@@ -17,21 +17,17 @@ const ScalePromo = () => {
               by the same passion as you.
             </p>
 
-            <Link
-              href="/signin"
-              className=" w-fit hover:bg-white hover:text-cyan-600 duration-300 transition ease-in px-3 h-fit py-2 border-[1px] border-white text-white rounded-lg text-2xl absolute bottom-6"
-            >
-              Get started
-            </Link>
+            <div className=" w-fit hover:bg-white hover:text-cyan-600 duration-300 transition ease-in px-3 h-fit py-2 border-[1px] border-white text-white rounded-lg text-2xl absolute bottom-6">
+              Coming soon
+            </div>
           </div>
 
           {/* RIGHT SIDE  */}
           <div className="h-full w-7/12 flex justify-between items-center gap-2">
             {ScalePromoInfo.map((btn) => (
-              <Link
+              <div
                 className="w-full relative mx-4 h-[80%] flex justify-center items-center text-black group hover:bg-white transition duration-300 ease-in-out bg-white/70 rounded-xl"
                 key={btn.id}
-                href="/signin"
               >
                 {btn.icon}
 
@@ -39,7 +35,7 @@ const ScalePromo = () => {
                   <p className=" text-[10px]">via</p>
                   <p className=" text-xl">{btn.provName}</p>
                 </span>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

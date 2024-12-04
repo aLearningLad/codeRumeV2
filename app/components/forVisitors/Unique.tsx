@@ -34,7 +34,7 @@ const Unique = () => {
       <UniqueCard
         heading="AI-Powered tutoring - Coming soon"
         blurb="Make use of artificial intelligence to seek out and fix bugs, explain code, or give suggestions on how you might improve existing snippets."
-        btnText="More on code Rume AI"
+        btnText="Learn more"
         imgLink="/assets/ai.png"
       />
     </div>

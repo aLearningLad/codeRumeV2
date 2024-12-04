@@ -1,7 +1,5 @@
 "use client";
 
-import { Troomnavdata } from "@/lib/types";
-
 const RoomNavBtn: React.FC<Troomnavdata> = ({
   optionIcon,
   optionId,

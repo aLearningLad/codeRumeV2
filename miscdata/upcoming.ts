@@ -1,5 +1,3 @@
-import { Tupcoming } from "@/lib/types";
-
 export const upcoming: Tupcoming[] = [
   {
     featureId: "2bYDbd7",

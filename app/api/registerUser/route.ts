@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     console.log("Here is the name value: ", display_name);
     console.log("Values are missing, bruv");
     return NextResponse.json({
-      message: "Please ensure all values are send from the client!",
+      message: "Please ensure all values are sent from the client!",
     });
   }
   try {
