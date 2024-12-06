@@ -1,3 +1,5 @@
+"use client";
+
 import { newsquares } from "@/miscdata/newsquares";
 import Link from "next/link";
 import {
@@ -19,65 +21,33 @@ import { TiThMenu } from "react-icons/ti";
 import { FaAnglesRight, FaSquareCaretRight } from "react-icons/fa6";
 import { loggedinnavdata } from "@/miscdata/loggedinnavdata";
 import SignOutBtn from "./components/forHome/SignOutBtn";
+import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
-export default async function Home() {
-  // const [emailBody, setEmailBody] = useState<string>(
-  //   "Hi there! If you recieve this, it means your email sender service is working!"
-  // );
-  // const [subjectLine, setSubjectLine] = useState<string>(
-  //   "This is just a test subject line"
-  // );
-  // const [sessionHost, setSessionHost] = useState<string>(
-  //   "Thato, also known as HIM!"
-  // );
-  // const [potentialCollaborators, setPotentialCollaborators] = useState<
-  //   string[]
-  // >(["mocmanca@gmail.com", "leapingbulls@gmail.com"]);
+export default function Home() {
+  const [userId, setUserId] = useState<string>();
+  const [collabsData, setCollabsData] = useState<Tcollaborator[]>([]);
 
-  // const { signOut } = useClerk();
+  // ====================> CSR FROM HERE <======================
 
-  // send invite to codeRume session
-  // const handleSend = async () => {
-  //   try {
-  //     const response = await fetch("/api/invite", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         emailBody,
-  //         subjectLine,
-  //         sessionHost,
-  //         potentialCollaborators,
-  //       }),
-  //     });
+  // get userId
+  useEffect(() => {
+    const getUserId = async () => {
+      const { isLoaded, isSignedIn, user } = useUser();
+      if (isSignedIn) {
+        setUserId(user.id);
+      }
+      console.log("The user ID: ", userId);
+    };
 
-  //     const data = await response.json();
+    getUserId();
+  }, []);
 
-  //     if (response.ok) {
-  //       console.log("Email to workers sent successfully", data);
-  //     } else {
-  //       console.error("Failed to send invites: ", data.message);
-  //       alert("Error sending email to admin");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error while sending email: ", error);
-  //   }
-  // };
-  const user = await currentUser();
-  const userId = user?.id;
-
-  const collabsData = await sql(
-    `SELECT * FROM all_collaborators WHERE friend_id = $1`,
-    [userId]
-  );
-
-  console.log("Here is the list of collaborators: ", collabsData);
+  // get collabsData
+  useEffect(() => {}, [userId]);
 
   return (
     <main className=" w-full flex-col text-black flex">
-      {/* Welcome!
-      <button onClick={handleSend}>Send Invite</button> */}
       <div className=" w-full ">
         <nav className=" w-full p-4 h-20 border-b-2 border-slate-500/20 ">
           <Dialog>
@@ -257,18 +227,8 @@ export default async function Home() {
             )}
           </div>
 
-          {/* right side with video */}
+          {/* right side */}
           <div className=" hidden h-[60vh] lg:flex w-5/12 flex-row ">
-            {/* <video
-              src="/assets/feedvid1.mp4"
-              width={1920}
-              height={1080}
-              autoPlay={true}
-              controls={false}
-              loop
-              muted
-              className=" w-fit overflow-clip rounded-xl  "
-            /> */}
             <div className=" h-full flex flex-col text-start pl-3">
               <h2 className=" text-4xl ">
                 Explore <b className=" text-2xl">codeRume&copy;</b> as a

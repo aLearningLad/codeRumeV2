@@ -1,8 +1,10 @@
+"use client";
+
 import ProfileNav from "@/app/components/forProfile/ProfileNav";
 import RegisterUserToDb from "@/app/components/forProfile/RegisterUserToDb";
 import sql from "@/lib/db";
 import client from "@/lib/db";
-import { UserProfile } from "@clerk/nextjs";
+import { UserProfile, useUser } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { FaPlus, FaTrashAlt } from "react-icons/fa";
@@ -24,264 +26,29 @@ import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
 import ProfileCollabBtn from "@/app/components/forProfile/ProfileCollabBtn";
 import CollabAdd from "@/app/components/forProfile/CollabAdd";
 import ProfileSignOut from "@/app/components/forProfile/ProfileSignOut";
+import { useEffect, useState } from "react";
 
 const ProfilePage = async () => {
-  // let user;
-  // try {
-  //   //   // get user from clerk
-  //   user = await currentUser();
-  //   const userImg = user?.imageUrl;
+  const [userId, setUserId] = useState<string>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [DBProfile, setDBProfile] = useState();
 
-  //   if (!user) {
-  //     return (
-  //       <div className="min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col ">
-  //         User is not found inside DB
-  //       </div>
-  //     );
-  //     // throw new Error(
-  //     //   "So, the user is either not authenticated OR Clerk failed to fetch the user's data"
-  //     // );
-  //   }
+  // get id from Clerk
+  useEffect(() => {
+    const getUserId = async () => {
+      const { isLoaded, isSignedIn, user } = useUser();
+    };
+  }, []);
 
-  //   // check that user is not in db
-  //   const result = await sql(`SELECT * FROM all_users WHERE user_id = $1`, [
-  //     user?.id,
-  //   ]).catch((err) => {
-  //     console.error("Database query failed: ", err);
-  //     throw new Error("Database error while fetching user", err);
-  //   });
+  // get user Info from NEON
+  useEffect(() => {}, [userId]);
 
-  //   const collabsList = await sql(
-  //     `SELECT * FROM all_collaborators WHERE friend_id = $1`,
-  //     [user?.id]
-  //   ).catch((collabListError) => {
-  //     console.error("Error retrieving collabs list data: ", collabListError);
-  //     throw new Error("Unable to fetch collabs list data: ", collabListError);
-  //   });
-
-  //   console.log("This is the collabs list: ", collabsList);
-
-  //   if (result.length < 1 || !result) {
-  //     return (
-  //       <div className=" min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col ">
-  //         <h1 className=" text-2xl font-semibold mb-4 ">
-  //           Welcome to codeRume!
-  //         </h1>
-  //         <h1 className=" text-xl mb-2 ">
-  //           It seems codeRume has not captured your details yet
-  //         </h1>
-
-  //         <h3>
-  //           We will keep it simple for now. The most important thing is to
-  //           attach a display name for your profile.
-  //         </h3>
-
-  //         {user?.fullName && user.fullName.length > 2 ? (
-  //           <RegisterUserToDb
-  //             display_name={user.fullName}
-  //             email={user.emailAddresses[0].emailAddress}
-  //             user_id={user.id}
-  //           />
-  //         ) : (
-  //           <>Let me add my display name now</>
-  //         )}
-  //       </div>
-  //     );
-  //   }
-
-  //   return (
-  //     <div className=" h-screen w-full flex bg-slate-900 text-white gap-3 p-5 ">
-  //       {/* left side  */}
-  //       <div className=" lg:flex hidden px-2 md:px-5 py-5 items-center justify-start relative flex-col lg:w-2/12 bg-slate-500/10 rounded-lg ">
-  //         <section className=" w-full flex flex-col text-start mb-12 border-b-2 pb-2 border-slate-500/40 ">
-  //           <h1 className=" text-2xl font-semibold ">Account</h1>
-  //           <h3 className=" text-[14px] text-neutral-300 ">
-  //             Manage your account info
-  //           </h3>
-  //         </section>
-
-  //         <ProfileNav />
-
-  //         <ProfileSignOut />
-  //       </div>
-
-  //       {/* right side  */}
-  //       <div className=" w-full lg:w-10/12 bg-slate-500/10 rounded-lg flex flex-col p-5 overflow-auto ">
-  //         <header className=" w-full text-start text-xl  border-b-2 border-slate-500/40 mb-12">
-  //           Profile details
-  //         </header>
-  //         {/* top */}
-  //         <section className=" py-12 lg:py-0 lg:h-[15vh] w-full flex flex-col lg:flex-row border-b-2 border-slate-500/30 mb-4 gap-6 lg:gap-0  ">
-  //           <div className=" w-full lg:w-3/12 h-full flex justify-start items-center text-2xl sm:text-xl md:text-lg lg:text-[14px]">
-  //             Profile
-  //           </div>
-  //           <div className=" w-full lg:w-5/12 h-full flex justify-start items-center gap-7">
-  //             <Image
-  //               width={80}
-  //               height={80}
-  //               src={(userImg as string) || "/assets/crlogo.png"}
-  //               alt="user profile image"
-  //               className=" rounded-full overflow-clip "
-  //             />
-  //             <p className=" text-xl lg:text-[14px] ">{user?.fullName}</p>
-  //           </div>
-  //           <div className=" w-full lg:w-4/12 h-full flex justify-start items-center text-[14px]">
-  //             <EditProfileBtn />
-  //           </div>
-  //         </section>
-
-  //         {/* middle  */}
-  //         <section className=" w-full flex flex-col lg:flex-row lg:py-0 py-12 lg:h-[25vh] border-b-2 border-slate-500/20 mb-4 ">
-  //           <div className=" lg:w-3/12 w-full h-full items-start flex gap-2 ">
-  //             <div className="flex items-center gap-2 ">
-  //               <p className="text-xl lg:text-[14px] ">Email addresses</p>
-  //               <IoMdMailUnread size={12} className=" text-white " />
-  //             </div>
-  //           </div>
-  //           <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
-  //             {user?.emailAddresses.map((anEmail, index) => (
-  //               <span
-  //                 key={anEmail.id}
-  //                 className=" flex items-center justify-center gap-1"
-  //               >
-  //                 {anEmail.emailAddress}
-  //                 {index === 0 && (
-  //                   <p className=" text-[10px] text-neutral-400 font-light ">
-  //                     Primary
-  //                   </p>
-  //                 )}
-  //                 <div className=" w-[4px] h-[4px] rounded-full bg-green-400 " />
-  //               </span>
-  //             ))}
-
-  //             {/* dialog to add more emails */}
-  //             <Dialog>
-  //               <DialogTrigger>
-  //                 <div className="flex w-full h-20 lg:h-10 sm:w-10/12 md:w-8/12 lg:w-fit hover:scale-95 transition-all group duration-300 ease-in-out hover:bg-white hover:text-black gap-2 items-center justify-center mt-5 px-8 bg-slate-500/20 rounded-md ">
-  //                   <FaPlus
-  //                     size={12}
-  //                     className=" text-white group-hover:text-black "
-  //                   />
-  //                   <p className=" text-[12px] ">Add backup email address</p>
-  //                 </div>
-  //               </DialogTrigger>
-  //               <DialogContent>
-  //                 <DialogHeader>
-  //                   <DialogTitle className=" text-center">
-  //                     Premium Feature
-  //                   </DialogTitle>
-  //                   <DialogDescription className=" text-center text-black ">
-  //                     This action is currently reserved for a selected group of
-  //                     users running the beta program. After launch, premium
-  //                     features such as LLM-based tutoring, multiple accounts,
-  //                     and profile changes will be available to the general
-  //                     public for subscription.
-  //                   </DialogDescription>
-  //                 </DialogHeader>
-  //               </DialogContent>
-  //             </Dialog>
-  //           </div>
-  //         </section>
-
-  //         {/* bottom */}
-  //         <section className=" w-full flex flex-col lg:flex-row h-[25vh] py-4 lg:py-0 border-b-2 border-slate-500/20 mb-4 ">
-  //           <div className=" lg:w-3/12 w-full h-full flex items-start  gap-2 ">
-  //             <div className=" flex items-center gap-2">
-  //               <p className=" text-xl lg:text-[14px] ">Phone numbers</p>
-  //               <BsFillTelephoneFill size={12} className=" text-white " />
-  //             </div>
-  //           </div>
-  //           <div className=" lg:w-9/12 w-full flex flex-col items-start h-full ">
-  //             {result && result[0].phone_number ? (
-  //               <div className=" flex h-12 gap-2 group items-center border-[3px] border-slate-500/10 rounded-md px-4 py-1">
-  //                 <span>{result[0].phone_number}</span>
-  //                 <DeleteNumberBtn userId={user?.id as string} />
-  //               </div>
-  //             ) : (
-  //               <>
-  //                 {user?.phoneNumbers && user?.phoneNumbers.length > 0 ? (
-  //                   user?.phoneNumbers.map((eachNumber) => (
-  //                     <div key={eachNumber.id} className="">
-  //                       {eachNumber.phoneNumber}
-  //                     </div>
-  //                   ))
-  //                 ) : (
-  //                   <ProfileNewPhoneNumber userId={user?.id as string} />
-  //                 )}
-  //               </>
-  //             )}
-  //           </div>
-  //         </section>
-
-  //         {/* the pits */}
-  //         <section className=" w-full flex lg:flex-row flex-col items-center justify-around lg:h-fit h-[20vh] ">
-  //           <div className="lg:w-3/12 w-full flex items-center  gap-2">
-  //             <p className=" text-xl lg:text-[14px] ">Collaborators</p>
-  //             <FaLayerGroup />
-  //           </div>
-
-  //           <div className=" w-full h-full lg:w-9/12 flex gap-3 items-center justify-start">
-  //             <span className=" h-full w-full sm:w-[95%] md:w-[90%] lg:w-[85%] bg-slate-500/30 p-2 rounded-md md:rounded-lg">
-  //               {collabsList && collabsList.length > 0 ? (
-  //                 <div className=" w-full h-full flex overflow-auto gap-4 p-2 items-center">
-  //                   {collabsList.map((card) => (
-  //                     <div className=" w-fit h-full lg:h-[80%] px-3 flex items-center bg-slate-500 text-white rounded-md ">
-  //                       {card.email}
-  //                     </div>
-  //                   ))}
-  //                 </div>
-  //               ) : (
-  //                 <div className=" w-full h-full flex justify-center items-center text-center">
-  //                   You don't currently have any collabs
-  //                 </div>
-  //               )}
-  //             </span>
-  //           </div>
-  //           <div className=" w-full md:w-8/12 lg:w-1/2 ">
-  //             <label htmlFor="" className=" text-lg lg:text-[14px] ">
-  //               Register a collaborator
-  //             </label>
-  //             <CollabAdd userId={user?.id as string} />
-  //           </div>
-  //         </section>
-  //       </div>
-  //     </div>
-  //   );
-  // } catch (error: any) {
-  //   console.error("Error while fetching user from db: ", error.errors || error);
-
-  //   return (
-  //     <div className=" w-full h-screen flex justify-center items-center text-white text-xl ">
-  //       codeRume is unable to load your profile right now. Please try again
-  //       later.
-  //     </div>
-  //   );
-  // }
-
-  // get user's id from clerk
-  const userData = await currentUser();
-
-  // console.log(userData);
-
-  if (userData?.id) {
-    const collabsList = await sql(
-      `SELECT * FROM all_collaborators WHERE friend_id = $1`,
-      [userData?.id]
-    );
-
-    return (
-      <div className=" w-full h-screen flex justify-center items-center text-xl text-black ">
-        This is the profile page
-      </div>
-    );
-  } else {
-    return (
-      <div className=" w-full h-screen flex justify-center items-center text-xl text-black ">
-        codeRume wasn't able to retrieve your profile details. Please try
-        reloading the page, and if the error persists, contact the developer
-      </div>
-    );
-  }
+  return (
+    <div className=" w-full h-screen flex justify-center items-center ">
+      This needs to be a client component. Fetch data within useEffect, have
+      states for loading.
+    </div>
+  );
 };
 
 export default ProfilePage;
