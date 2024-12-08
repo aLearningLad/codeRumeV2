@@ -36,6 +36,8 @@ const ProfilePage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [userDbData, setUserDbData] = useState<any>([]); //declare a type for this!!!
   const [collabsList, setCollabsList] = useState<Tcollaborator[]>([]);
+  const [isNameEdit, setIsNameEdit] = useState<boolean>(false);
+  const [editedName, setEditedName] = useState<string>("");
 
   // get user ID from clerk
   const userId = user?.id;
@@ -83,28 +85,55 @@ const ProfilePage = () => {
     if (userDbData.length < 1) {
       return (
         <div className=" min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col ">
-          <h1 className=" text-2xl font-semibold mb-4 ">
-            Welcome to codeRume!
-          </h1>
-          <h1 className=" text-xl mb-2 ">
-            It seems codeRume has not captured your details yet
-          </h1>
+          <>
+            <h1
+              className={` text-2xl ${
+                isNameEdit ? "hidden" : "flex"
+              } font-semibold mb-4 `}
+            >
+              Welcome to codeRume!
+            </h1>
+            <h1 className={` text-xl ${isNameEdit ? "hidden" : "flex"} mb-2 `}>
+              It seems codeRume has not captured your details yet
+            </h1>
 
-          <h3>
-            We will keep it simple for now. The most important thing is to
-            attach a display name for your profile.
-          </h3>
+            <h3 className={` ${isNameEdit ? "hidden" : "flex"} `}>
+              We will keep it simple for now. The most important thing is to
+              attach a display name for your profile.
+            </h3>
+          </>
 
-          {/* if google acc has a username, use it. If not, allow manual entry */}
-          {user?.fullName && user.fullName.length > 2 ? (
+          {isNameEdit ? (
+            <>Change name here</>
+          ) : (
+            <>
+              {" "}
+              {/* if google acc has a username, use it. If not, allow manual entry */}
+              {user?.fullName && user.fullName.length > 2 ? (
+                <RegisterUserToDb
+                  display_name={user.fullName}
+                  email={user.emailAddresses[0].emailAddress}
+                  user_id={user.id}
+                />
+              ) : (
+                <>Let me add my display name now</>
+              )}
+            </>
+          )}
+
+          <button
+            className={`${isNameEdit ? "hidden" : "flex"}`}
+            onClick={() => setIsNameEdit(true)}
+          >
+            No, I wish to change my display name
+          </button>
+          <div className={`${isNameEdit ? "hidden" : "flex"}`}>
             <RegisterUserToDb
-              display_name={user.fullName}
+              display_name={editedName}
               email={user.emailAddresses[0].emailAddress}
               user_id={user.id}
             />
-          ) : (
-            <>Let me add my display name now</>
-          )}
+          </div>
         </div>
       );
     } else {
