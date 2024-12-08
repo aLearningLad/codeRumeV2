@@ -26,7 +26,7 @@ import EditProfileBtn from "@/app/components/forProfile/EditProfileBtn";
 import ProfileCollabBtn from "@/app/components/forProfile/ProfileCollabBtn";
 import CollabAdd from "@/app/components/forProfile/CollabAdd";
 import ProfileSignOut from "@/app/components/forProfile/ProfileSignOut";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { GetCollaborators, GetUserInDB } from "@/app/actions";
 
 const ProfilePage = () => {
@@ -84,7 +84,7 @@ const ProfilePage = () => {
   if (isSignedIn) {
     if (userDbData.length < 1) {
       return (
-        <div className=" min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col ">
+        <div className=" min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col p-2 sm:p-3 md:p-4 lg:p-5 ">
           <>
             <h1
               className={` text-2xl ${
@@ -97,16 +97,47 @@ const ProfilePage = () => {
               It seems codeRume has not captured your details yet
             </h1>
 
-            <h3 className={` ${isNameEdit ? "hidden" : "flex"} `}>
+            <h3 className={` ${isNameEdit ? "hidden" : "flex text-center"} `}>
               We will keep it simple for now. The most important thing is to
               attach a display name for your profile.
             </h3>
           </>
 
           {isNameEdit ? (
-            <>Change name here</>
+            <div
+              className={`${
+                isNameEdit &&
+                "flex w-full flex-col items-center justify-center "
+              }`}
+            >
+              <span
+                className={`${
+                  isNameEdit &&
+                  "flex w-full flex-col items-center justify-center"
+                }`}
+              >
+                <label htmlFor="">Enter your display name</label>
+                <input
+                  name="editedName"
+                  value={editedName}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setEditedName(e.target.value)
+                  }
+                  type="text"
+                  className=" bg-slate-500/40 w-full focus:scale-95 transition-all duration-300 ease-in-out sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 mt-2 md:mt-3 rounded-md text-neutral-200 text-[14px] px-2 h-16 md:h-14 "
+                  placeholder="Eg. codeSavant101"
+                />
+              </span>
+
+              <RegisterUserToDb
+                display_name={editedName}
+                email={user.emailAddresses[0].emailAddress}
+                user_id={user.id}
+                isNameEdit={isNameEdit}
+              />
+            </div>
           ) : (
-            <>
+            <div className="w-full h-60 flex flex-col items-center justify-center gap-5">
               {" "}
               {/* if google acc has a username, use it. If not, allow manual entry */}
               {user?.fullName && user.fullName.length > 2 ? (
@@ -118,22 +149,19 @@ const ProfilePage = () => {
               ) : (
                 <>Let me add my display name now</>
               )}
-            </>
+            </div>
           )}
 
           <button
-            className={`${isNameEdit ? "hidden" : "flex"}`}
+            className={`${
+              isNameEdit
+                ? "hidden"
+                : "flex w-full py-1 text-center justify-center items-center hover:scale-95 transition-all duration-300 ease-in-out border-2 border-white hover:bg-transparent hover:text-white sm:w-10/12 md:w-8/12 lg:w-fit lg:px-4 h-14 rounded-md bg-white text-black text-lg"
+            }`}
             onClick={() => setIsNameEdit(true)}
           >
-            No, I wish to change my display name
+            No, edit my display name
           </button>
-          <div className={`${isNameEdit ? "hidden" : "flex"}`}>
-            <RegisterUserToDb
-              display_name={editedName}
-              email={user.emailAddresses[0].emailAddress}
-              user_id={user.id}
-            />
-          </div>
         </div>
       );
     } else {

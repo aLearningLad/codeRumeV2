@@ -20,6 +20,7 @@ import { IoArrowBackSharp } from "react-icons/io5";
 
 const CTABtn = () => {
   const [isNew, setIsNew] = useState<string>(isNewOptions.N);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { signIn } = useSignIn();
   const { signUp } = useSignUp();
@@ -47,7 +48,7 @@ const CTABtn = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger className="rounded-lg lg:rounded-xl hover:scale-95 transition-all duration-300 ease-in-out w-fit h-fit py-3 px-5 bg-black text-white">
         Get Started
       </DialogTrigger>
@@ -78,7 +79,7 @@ const CTABtn = () => {
               }
               className=" flex gap-1  group flex-row items-center hover:scale-105 transition-all duration-300 ease-in-out justify-center rounded-xl px-4 h-8 border-[1px] hover:bg-neutral-200 border-neutral-300 "
             >
-              {"I'm"} new here, let me register{" "}
+              {"I'm"} new here, let me look around{" "}
               <IoFolderOpen
                 size={16}
                 className=" text-cyan-600 group-hover:text-black"

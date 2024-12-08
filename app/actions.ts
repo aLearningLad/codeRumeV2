@@ -2,6 +2,7 @@
 
 import sql from "@/lib/db";
 
+// fetch user data
 export async function GetUserInDB(userId: string) {
   try {
     const res = await sql(`SELECT * FROM all_users WHERE user_id = $1`, [
@@ -14,6 +15,7 @@ export async function GetUserInDB(userId: string) {
   }
 }
 
+// fetch collaborators
 export async function GetCollaborators(userId: string) {
   try {
     const result = await sql(
