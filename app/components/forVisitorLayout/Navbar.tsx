@@ -2,6 +2,14 @@ import { navlinks } from "@/miscdata/navlinks";
 import Link from "next/link";
 import DynamicBtn from "../others/DynamicBtn";
 import OptionsBtn from "../others/OptionsBtn";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Navbar = () => {
   return (
@@ -19,14 +27,33 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         <section className=" hidden xl:flex h-full items-center justify-start gap-7 pl-12">
-          {navlinks.map((navlink) => (
-            <Link
-              className="border-[1px] border-transparent p-3 rounded-lg hover:scale-90 transition duration-500 ease-in hover:border-black"
-              key={navlink.id}
-              href={navlink.uniqueLink}
-            >
-              {navlink.title}
-            </Link>
+          {navlinks.map(({ id, title, desc }) => (
+            // <Link
+            //   className="border-[1px] border-transparent p-3 rounded-lg hover:scale-90 transition duration-500 ease-in hover:border-black"
+            //   key={navlink.id}
+            //   href={navlink.uniqueLink}
+            // >
+            //   {navlink.title}
+            // </Link>
+            <Dialog>
+              <DialogTrigger
+                key={id}
+                className="border-[1px] border-transparent p-3 rounded-lg hover:scale-90 transition duration-500 ease-in hover:border-black"
+              >
+                {title}
+              </DialogTrigger>
+              <DialogContent className=" px-2 sm:px-3 md:px-4 lg:px-5 py-5 ">
+                <DialogHeader>
+                  <DialogTitle className=" text-center font-normal text-xl">
+                    {title}
+                  </DialogTitle>
+                  <DialogDescription></DialogDescription>
+                </DialogHeader>
+                <section className=" text-center text-black h-fit py-12 flex justify-center items-center text-lg ">
+                  {desc}
+                </section>
+              </DialogContent>
+            </Dialog>
           ))}
         </section>
       </div>

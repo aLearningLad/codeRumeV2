@@ -17,6 +17,8 @@ import { FcGoogle } from "react-icons/fc";
 import { IoFolderOpen } from "react-icons/io5";
 import { IoArrowForwardSharp } from "react-icons/io5";
 import { IoArrowBackSharp } from "react-icons/io5";
+import { resourcesList } from "@/miscdata/resourceslist";
+import Image from "next/image";
 
 const CTABtn = () => {
   const [isNew, setIsNew] = useState<string>(isNewOptions.N);
@@ -73,18 +75,52 @@ const CTABtn = () => {
                 Sign in with Google
               </p>
             </button>
-            <button
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                setIsNew(isNewOptions.Y)
-              }
-              className=" flex gap-1  group flex-row items-center hover:scale-105 transition-all duration-300 ease-in-out justify-center rounded-xl px-4 h-8 border-[1px] hover:bg-neutral-200 border-neutral-300 "
-            >
-              {"I'm"} new here, let me look around{" "}
-              <IoFolderOpen
-                size={16}
-                className=" text-cyan-600 group-hover:text-black"
-              />
-            </button>
+            <Dialog>
+              <DialogTrigger>
+                <div className=" flex gap-1  group flex-row items-center hover:scale-105 transition-all duration-300 ease-in-out justify-center rounded-xl px-4 h-8 border-[1px] hover:bg-neutral-200 border-neutral-300 ">
+                  {"I'm"} new here, let me look around{" "}
+                  <IoFolderOpen
+                    size={16}
+                    className=" text-cyan-600 group-hover:text-black"
+                  />
+                </div>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className=" text-center font-normal text-black">
+                    Here's a list of resources to help get you up to speed
+                  </DialogTitle>
+                  <DialogDescription></DialogDescription>
+                </DialogHeader>
+
+                <section className=" h-[85vh] sm:h-[80vh] lg:h-[75vh] p-1 sm:p-2 md:p-3 lg:p-5 flex flex-col items-center text-center overflow-auto ">
+                  {resourcesList.map(
+                    ({
+                      resourceIcon,
+                      resourceId,
+                      resourceLink,
+                      resourceTitle,
+                    }) => (
+                      <Link
+                        key={resourceId}
+                        target="_blank"
+                        href={resourceLink}
+                        className=" w-full flex justify-center items-center gap-2 min-h-16 bg-slate-950 rounded-md text-white my-4 md:my-3"
+                      >
+                        <Image
+                          src={resourceIcon}
+                          width={30}
+                          height={30}
+                          className=" rounded-md "
+                          alt="resource image"
+                        />
+                        <p>{resourceTitle}</p>
+                      </Link>
+                    )
+                  )}
+                </section>
+              </DialogContent>
+            </Dialog>
           </div>
         )) ||
           (isNew === isNewOptions.Y && (

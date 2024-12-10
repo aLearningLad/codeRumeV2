@@ -8,6 +8,7 @@ declare type Tnavlinks = {
   id: number;
   title: string;
   uniqueLink: string;
+  desc: string;
 };
 
 declare type Tfooterlinks = {
@@ -86,4 +87,11 @@ declare type Tpromotiles = {
   author: string;
   year: number;
   language: string;
+};
+
+declare type Tresourceslist = {
+  resourceId: string;
+  resourceTitle: string;
+  resourceLink: string;
+  resourceIcon: string;
 };
