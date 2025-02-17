@@ -8,15 +8,34 @@ const Endorsements = () => {
         300+ Forbes Global 2000 companies choose code Rume
       </h1>
       <section className="flex w-full p-1 md:p-2 xl:p-5 flex-col items-center justify-around xl:flex-row xl:justify-between">
-        {endorsementdata.map((company) => (
-          <Image
-            src={company.companyLogo}
-            key={company.companyId}
-            width={120}
-            height={70}
-            alt="endorserCompany"
-          />
-        ))}
+        <div className="flex animate-slide">
+          {endorsementdata.map((company) => (
+            <div className="flex-shrink-0 px-5" key={company.companyId}>
+              <Image
+                src={company.companyLogo}
+                key={company.companyId}
+                width={120}
+                height={70}
+                alt="endorserCompany"
+              />
+            </div>
+          ))}
+
+          {/* more copies so slide is long enough */}
+          {endorsementdata.map((company) => (
+            <div
+              className="flex-shrink-0 px-5"
+              key={company.companyId + "-duplicate"}
+            >
+              <Image
+                src={company.companyLogo}
+                width={120}
+                height={70}
+                alt="endorserCompany"
+              />
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

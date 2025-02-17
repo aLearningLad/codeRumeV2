@@ -96,3 +96,12 @@ declare type Tresourceslist = {
   resourceLink: string;
   resourceIcon: string;
 };
+
+declare type Tpricingtileinfo = {
+  id: number;
+  title: string;
+  tileImg: string;
+  subheading: string;
+  price: string;
+  description: string;
+};

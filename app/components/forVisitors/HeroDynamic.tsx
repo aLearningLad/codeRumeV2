@@ -22,6 +22,7 @@ import {
 import { resourcesList } from "@/miscdata/resourceslist";
 import Image from "next/image";
 import { FaEye } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const HeroDynamic = () => {
   const userId = useUser().user?.id;
@@ -64,8 +65,11 @@ const HeroDynamic = () => {
 
   return (
     <Dialog>
-      <DialogTrigger className=" w-full border-[1px] hover:bg-cyan-500 transition duration-300 ease-in hover:border-transparent border-black xl:w-1/2 py-5 flex justify-center items-center text-xl bg-black text-white rounded-lg">
-        Get Started
+      <DialogTrigger
+        asChild
+        className=" w-full border-[1px] hover:bg-cyan-500 transition ease-in hover:border-transparent border-black xl:w-1/2 py-5 flex justify-center items-center text-xl bg-black text-white rounded-lg animate-pulse"
+      >
+        <button>Get Started</button>
       </DialogTrigger>
       <DialogContent className=" p-5 lg:p-12 h-[60vh] flex flex-col justify-center ">
         <DialogHeader>

@@ -53,7 +53,7 @@ const Navbar = () => {
                 <section className=" text-center text-black h-fit py-12 flex flex-col justify-center items-center text-lg text-[18px] md:text-[16px] lg:text-[14px] ">
                   {desc}
 
-                  {id === 1903521 && <PricingSlides />}
+                  {/* {id === 1903521 && <PricingSlides />} */}
                 </section>
               </DialogContent>
             </Dialog>
