@@ -75,14 +75,14 @@ const ProfilePage = () => {
 
   while (!isLoaded) {
     return (
-      <div className=" w-full h-screen flex justify-center items-center ">
+      <div className=" w-full h-screen flex justify-center items-center text-2xl lg:text-xl ">
         Just a second while codeRume sets everything up . . .
       </div>
     );
   }
 
   if (isSignedIn) {
-    if (userDbData.length < 1) {
+    if (userDbData.length < 1 || !userDbData) {
       return (
         <div className=" min-h-screen w-full bg-slate-950 flex justify-center items-center text-white flex-col p-2 sm:p-3 md:p-4 lg:p-5 ">
           <>

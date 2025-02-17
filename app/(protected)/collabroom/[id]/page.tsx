@@ -85,6 +85,7 @@ const CollabRoom: React.FC<chatProps | any> = ({ params }) => {
         }
       } catch (error) {
         console.log("Error fetching collaborators: ", error);
+        console.log(`This is the database URL: ${process.env.DATABASE_URL}`);
       }
     };
 

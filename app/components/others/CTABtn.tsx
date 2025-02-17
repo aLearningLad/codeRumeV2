@@ -19,6 +19,7 @@ import { IoArrowForwardSharp } from "react-icons/io5";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { resourcesList } from "@/miscdata/resourceslist";
 import Image from "next/image";
+import { FaEye } from "react-icons/fa6";
 
 const CTABtn = () => {
   const [isNew, setIsNew] = useState<string>(isNewOptions.N);
@@ -79,7 +80,7 @@ const CTABtn = () => {
               <DialogTrigger>
                 <div className=" flex gap-1  group flex-row items-center hover:scale-105 transition-all duration-300 ease-in-out justify-center rounded-xl px-4 h-8 border-[1px] hover:bg-neutral-200 border-neutral-300 ">
                   {"I'm"} new here, let me look around{" "}
-                  <IoFolderOpen
+                  <FaEye
                     size={16}
                     className=" text-cyan-600 group-hover:text-black"
                   />

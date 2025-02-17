@@ -7,6 +7,7 @@ declare type Tcollaborator = {
 declare type Tnavlinks = {
   id: number;
   title: string;
+  modalHeader: string;
   uniqueLink: string;
   desc: string;
 };

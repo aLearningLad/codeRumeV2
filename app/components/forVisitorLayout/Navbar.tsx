@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import PricingSlides from "../animatedComps/PricingSlides";
 
 const Navbar = () => {
   return (
@@ -27,7 +28,7 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         <section className=" hidden xl:flex h-full items-center justify-start gap-7 pl-12">
-          {navlinks.map(({ id, title, desc }) => (
+          {navlinks.map(({ id, title, desc, modalHeader }) => (
             // <Link
             //   className="border-[1px] border-transparent p-3 rounded-lg hover:scale-90 transition duration-500 ease-in hover:border-black"
             //   key={navlink.id}
@@ -45,12 +46,14 @@ const Navbar = () => {
               <DialogContent className=" px-2 sm:px-3 md:px-4 lg:px-5 py-5 ">
                 <DialogHeader>
                   <DialogTitle className=" text-center font-normal text-xl">
-                    {title}
+                    {modalHeader}
                   </DialogTitle>
                   <DialogDescription></DialogDescription>
                 </DialogHeader>
-                <section className=" text-center text-black h-fit py-12 flex justify-center items-center text-lg ">
+                <section className=" text-center text-black h-fit py-12 flex flex-col justify-center items-center text-lg text-[18px] md:text-[16px] lg:text-[14px] ">
                   {desc}
+
+                  {id === 1903521 && <PricingSlides />}
                 </section>
               </DialogContent>
             </Dialog>

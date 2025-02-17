@@ -1,9 +1,15 @@
-export // register user to db
-const handleRegisterUserToDb = async (
+"use client";
+
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
+// register user to db
+export const handleRegisterUserToDb = async (
   display_name: string,
   email: string,
   user_id: string
 ) => {
+  const router = useRouter();
   try {
     const result = await fetch("/api/registerUser", {
       method: "POST",
