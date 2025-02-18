@@ -6,6 +6,7 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
       "Learn the intricacies of this powerful language. Optimize performance by managing memory usage, create super-fast software and scale to infinity.",
     btnText: "More on C++",
     img: "/",
+    infoLink: "https://cplusplus.com/doc/tutorial",
   },
   {
     title: "Python",
@@ -14,6 +15,7 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
       "Automate virtually everything, build AI models, handle enormous amounts of data, create world-changing programs",
     btnText: "Ask about Python",
     img: "/",
+    infoLink: "https://docs.python.org/3/",
   },
   {
     title: "Rust",
@@ -22,6 +24,7 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
       "Empowering, fast, and parallel programming with strict memory safety and fearless concurrency. Unlock your coding potential today!",
     btnText: "Rust in-depth",
     img: "/",
+    infoLink: "https://www.rust-lang.org/learn",
   },
   {
     title: "Ruby",
@@ -30,6 +33,7 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
       " A dynamic, elegant language known for its simplicity, productivity, and vibrant community. Dive in and enjoy coding with joy!",
     btnText: "Learn Ruby",
     img: "/",
+    infoLink: "https://ruby-doc.org",
   },
   {
     title: "Swift",
@@ -38,6 +42,7 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
       "Carve your way through the iOS ecosystem. Build solutions for MacOS, iPhones and other Apple devices",
     btnText: "See more",
     img: "/",
+    infoLink: "https://www.swift.org/documentation",
   },
   {
     title: "Java",
@@ -46,5 +51,6 @@ export const dynamicpromoinfo: Tdynamicpromoinfo[] = [
     btnText: "On Java",
     subheading: "Reliable versatility",
     img: "/",
+    infoLink: "https://docs.oracle.com/en/java",
   },
 ];

@@ -80,6 +80,7 @@ declare type Tdynamicpromoinfo = {
   btnText: string;
   img?: string;
   objectShown?: number;
+  infoLink: string;
 };
 
 declare type Tpromotiles = {

@@ -5,6 +5,7 @@ import { Synchro, Community, Learning } from "@/public/assets";
 import useStore from "@/app/(store)/store";
 import { useState } from "react";
 import { dynamicpromoinfo } from "@/miscdata/dynamicpromoinfo";
+import Link from "next/link";
 
 const DynamicPromo = () => {
   const [info, setInfo] = useState<Tdynamicpromoinfo>();
@@ -38,9 +39,13 @@ const DynamicPromo = () => {
 
         {/* BOTTOM  */}
         <div className="w-full h-[30%] flex items-end justify-start">
-          <button className=" w-fit px-5 h-fit py-3 text-xl bg-black text-white rounded-xl">
+          <Link
+            href={infoBlocks[objectShown].infoLink}
+            target="_blank"
+            className=" w-fit px-5 h-fit py-3 text-xl bg-black text-white rounded-xl"
+          >
             {infoBlocks[objectShown].btnText}
-          </button>
+          </Link>
         </div>
       </section>
     </div>
