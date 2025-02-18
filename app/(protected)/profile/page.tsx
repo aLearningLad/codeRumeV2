@@ -28,6 +28,8 @@ import CollabAdd from "@/app/components/forProfile/CollabAdd";
 import ProfileSignOut from "@/app/components/forProfile/ProfileSignOut";
 import { ChangeEvent, useEffect, useState } from "react";
 import { GetCollaborators, GetUserInDB } from "@/app/actions";
+import { IoTrashBin } from "react-icons/io5";
+import { TbTrashXFilled } from "react-icons/tb";
 
 const ProfilePage = () => {
   // const [userId, setUserId] = useState<string>();
@@ -38,6 +40,7 @@ const ProfilePage = () => {
   const [collabsList, setCollabsList] = useState<Tcollaborator[]>([]);
   const [isNameEdit, setIsNameEdit] = useState<boolean>(false);
   const [editedName, setEditedName] = useState<string>("");
+  const [fetchAgain, setFetchAgain] = useState<boolean>(false);
 
   // get user ID from clerk
   const userId = user?.id;
@@ -55,7 +58,7 @@ const ProfilePage = () => {
     };
 
     fetchUserData();
-  }, [userId]);
+  }, [userId, fetchAgain]);
 
   // get collabs list for this user
   useEffect(() => {
@@ -93,7 +96,11 @@ const ProfilePage = () => {
             >
               Welcome to codeRume!
             </h1>
-            <h1 className={` text-xl ${isNameEdit ? "hidden" : "flex"} mb-2 `}>
+            <h1
+              className={` text-xl ${
+                isNameEdit ? "hidden" : "flex text-center"
+              } mb-2 `}
+            >
               It seems codeRume has not captured your details yet
             </h1>
 
@@ -104,6 +111,7 @@ const ProfilePage = () => {
           </>
 
           {isNameEdit ? (
+            // to change to display name
             <div
               className={`${
                 isNameEdit &&
@@ -134,9 +142,12 @@ const ProfilePage = () => {
                 email={user.emailAddresses[0].emailAddress}
                 user_id={user.id}
                 isNameEdit={isNameEdit}
+                setIsNameEdit={setIsNameEdit}
+                setFetchAgain={setFetchAgain}
               />
             </div>
           ) : (
+            // keep name from Google profile and just register
             <div className="w-full h-60 flex flex-col items-center justify-center gap-5">
               {" "}
               {/* if google acc has a username, use it. If not, allow manual entry */}
@@ -160,6 +171,7 @@ const ProfilePage = () => {
             }`}
             onClick={() => setIsNameEdit(true)}
           >
+            <IoTrashBin color="red" className=" mr-1" />
             No, edit my display name
           </button>
         </div>

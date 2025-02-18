@@ -1,8 +1,13 @@
+import { SetStateAction } from "react";
+
 export interface IregisterUserToDb {
   display_name: string;
   user_id: string;
   email: string;
   isNameEdit?: boolean;
+  setIsNameEdit?: React.Dispatch<SetStateAction<boolean>>;
+  fetchAgain?: boolean;
+  setFetchAgain?: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface chatProps {

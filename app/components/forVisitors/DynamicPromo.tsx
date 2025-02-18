@@ -3,26 +3,37 @@
 import Image from "next/image";
 import { Synchro, Community, Learning } from "@/public/assets";
 import useStore from "@/app/(store)/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dynamicpromoinfo } from "@/miscdata/dynamicpromoinfo";
 import Link from "next/link";
+import { Store } from "lucide-react";
+import { promoimagesdata } from "@/miscdata/promoImages";
 
 const DynamicPromo = () => {
   const [info, setInfo] = useState<Tdynamicpromoinfo>();
-  const promoImage = useStore((store: any) => store.promoImage); //*************COME BACK TO THIS!!!**************
   const selectedTab = useStore((store: any) => store.selectedTab);
   const objectShown = useStore((store: any) => store.objectShown);
+  const [imageIndex, setImageIndex] = useState<number>(3);
 
   const infoBlocks: Tdynamicpromoinfo[] = dynamicpromoinfo;
 
+  // useffect to update image index with setInterval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prevIndex) => (prevIndex + 1) % promoimagesdata.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="h-[50%] mb-8 xl:mb-2 xl:h-[80%] w-full flex justify-center items-center text-3xl text-white rounded-xl overflow-clip">
-      <section className="w-full h-full xl:w-5/12 my-2 lg:my-0 lg:p-8 xl:px-2 xl:py-20 flex items-center justify-center xl:justify-end rounded-xl overflow-clip">
-        {/* CHANGE THIS EVERY 4 SECONDS VIA TIMEOUT FXN TO CHANGE STATE  */}
+      <section className="w-full h-[40vh] xl:w-5/12 my-2 lg:my-0 lg:p-8 xl:px-2 xl:py-20 flex items-center justify-center xl:justify-end rounded-xl overflow-clip">
         <Image
-          src={promoImage}
+          src={promoimagesdata[imageIndex]}
+          // src={promoimagesdata[imageIndex]}
           alt="promoImage"
-          className=" rounded-xl lg:rounded-2xl"
+          className=" rounded-xl lg:rounded-2xl overflow-clip"
           width={300}
           height={300}
         />

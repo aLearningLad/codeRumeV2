@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import sql from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const { display_name, email, user_id } = await request.json();

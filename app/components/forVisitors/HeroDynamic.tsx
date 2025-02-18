@@ -124,13 +124,15 @@ const HeroDynamic = () => {
                         href={resourceLink}
                         className=" w-full flex justify-center items-center gap-2 min-h-16 bg-slate-950 rounded-md text-white my-4 md:my-3"
                       >
-                        <Image
-                          src={resourceIcon}
-                          width={30}
-                          height={30}
-                          className=" rounded-md "
-                          alt="resource image"
-                        />
+                        <div className=" w-fit h-fit bg-white rounded-lg p-1">
+                          <Image
+                            src={resourceIcon}
+                            width={30}
+                            height={30}
+                            className=" rounded-md "
+                            alt="resource image"
+                          />
+                        </div>
                         <p>{resourceTitle}</p>
                       </Link>
                     )
