@@ -25,3 +25,10 @@ npm install
 ```
 npm run dev
 ```
+
+# 🧠 Lessons & Takeaways
+* Learned how to implement realtime communication without a traditional node server
+* Learned how to integrate Clerk middleware and use it to showcase appropriate UIs and access
+* Developed an understanding of how liveblocks works to ensure real time communication
+
+
