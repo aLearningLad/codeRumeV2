@@ -12,3 +12,16 @@
 | State Management    | Zustand      |
 | Storage    | PostgreSQL hosted on NeonDB      |
 | Auth   | Clerk     |
+
+## 🚀 Getting Started
+### :one: Clone and install
+```
+git clone https://github.com/aLearningLad/codeRumeV2.git
+cd codeRumeV2
+npm install
+```
+
+### :three: Run Locally
+```
+npm run dev
+```
